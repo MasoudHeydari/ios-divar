@@ -17,10 +17,12 @@
 		9506E0162170C3EE002A6FFC /* DetailAdvertisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9506E0152170C3EE002A6FFC /* DetailAdvertisingController.swift */; };
 		9508F194217245CA00A5F4E0 /* UIView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508F193217245CA00A5F4E0 /* UIView+Helper.swift */; };
 		9508F19621724A1A00A5F4E0 /* AdvertisingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */; };
+		9524FBCD218181A700650937 /* MainTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524FBCC218181A700650937 /* MainTabBarProtocol.swift */; };
 		957FC84521710CB10011CD8C /* UIButton+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC84421710CB10011CD8C /* UIButton+Helper.swift */; };
 		957FC847217127650011CD8C /* NewAdvertisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC846217127650011CD8C /* NewAdvertisingController.swift */; };
 		95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */; };
 		95C563E1217906A60084C265 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C563E0217906A60084C265 /* UIImageView+Helper.swift */; };
+		95CC6ADC2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */; };
 		95CE1A072175A76300673470 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A062175A76300673470 /* Utils.swift */; };
 		95CE1A092175A78700673470 /* UILabel+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A082175A78700673470 /* UILabel+Helper.swift */; };
 		95D92A052171AF4F0019FAFF /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */; };
@@ -49,10 +51,12 @@
 		9506E0152170C3EE002A6FFC /* DetailAdvertisingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAdvertisingController.swift; sourceTree = "<group>"; };
 		9508F193217245CA00A5F4E0 /* UIView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helper.swift"; sourceTree = "<group>"; };
 		9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisingModel.swift; sourceTree = "<group>"; };
+		9524FBCC218181A700650937 /* MainTabBarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarProtocol.swift; sourceTree = "<group>"; };
 		957FC84421710CB10011CD8C /* UIButton+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Helper.swift"; sourceTree = "<group>"; };
 		957FC846217127650011CD8C /* NewAdvertisingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingController.swift; sourceTree = "<group>"; };
 		95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingImageCell.swift; sourceTree = "<group>"; };
 		95C563E0217906A60084C265 /* UIImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helper.swift"; sourceTree = "<group>"; };
+		95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewAdvertisingViewController+Hekper.swift"; sourceTree = "<group>"; };
 		95CE1A062175A76300673470 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		95CE1A082175A78700673470 /* UILabel+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Helper.swift"; sourceTree = "<group>"; };
 		95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		9506DFFC2170B03B002A6FFC /* Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				9524FBCB2181817600650937 /* Protocols */,
 				957FC849217128300011CD8C /* View */,
 				95BF336E21721BBC00050769 /* Model */,
 				957FC848217127970011CD8C /* Controller */,
@@ -130,6 +135,14 @@
 				9506E0092170B03D002A6FFC /* Info.plist */,
 			);
 			path = Test1;
+			sourceTree = "<group>";
+		};
+		9524FBCB2181817600650937 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9524FBCC218181A700650937 /* MainTabBarProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		957FC848217127970011CD8C /* Controller */ = {
@@ -197,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				957FC846217127650011CD8C /* NewAdvertisingController.swift */,
+				95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */,
 			);
 			path = NewAdvertising;
 			sourceTree = "<group>";
@@ -302,6 +316,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Test1/Pods-Test1-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -310,6 +326,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +380,7 @@
 				95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */,
 				95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */,
 				9506DFFE2170B03B002A6FFC /* AppDelegate.swift in Sources */,
+				9524FBCD218181A700650937 /* MainTabBarProtocol.swift in Sources */,
 				95D92A0E2171D2030019FAFF /* UIColor+Helper.swift in Sources */,
 				95E8EE4F217E01E100735627 /* AboutUsViewController.swift in Sources */,
 				95C563E1217906A60084C265 /* UIImageView+Helper.swift in Sources */,
@@ -370,6 +389,7 @@
 				95D92A052171AF4F0019FAFF /* CustomNavigationController.swift in Sources */,
 				95E8EE4B217E01B300735627 /* MyFavAdvertisingViewController.swift in Sources */,
 				95E8EE45217DE51700735627 /* Const.swift in Sources */,
+				95CC6ADC2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
