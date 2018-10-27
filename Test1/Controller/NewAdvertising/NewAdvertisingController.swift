@@ -298,6 +298,10 @@ class NewAdvertisingController: UIViewController, UIImagePickerControllerDelegat
         return btn
     }()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -306,144 +310,10 @@ class NewAdvertisingController: UIViewController, UIImagePickerControllerDelegat
         addObserverToViewGustureRecognizer()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    func addObserverToViewGustureRecognizer(){
-        let notifier = NotificationCenter.default
-        notifier.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
-        
-        notifier.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
-        
-    }
-    
     func setupViews() {
         view.backgroundColor = .red
-        view.addSubview(scrollView)
-        
-        scrollView.addSubview(mainContainer)
-        
-        mainContainer.addSubview(locationLabel)
-        mainContainer.addSubview(btnChooseLocation)
-        mainContainer.addSubview(divider1)
-        mainContainer.addSubview(imageTextView)
-        mainContainer.addSubview(imageCollectionView)
-        mainContainer.addSubview(divider2)
-        mainContainer.addSubview(advertisingPhoneNumLabel)
-        mainContainer.addSubview(phoneNumTextFiled)
-        mainContainer.addSubview(pricaLabel)
-        mainContainer.addSubview(priceTextField)
-        mainContainer.addSubview(advertisingTitleLabel)
-        mainContainer.addSubview(advertisingTitleTextField)
-        mainContainer.addSubview(divider3)
-        mainContainer.addSubview(advertisingDescriptionLabel)
-        mainContainer.addSubview(advertisingDescriptionTextField)
-        mainContainer.addSubview(btnRegisterAdvertising)
-        mainContainer.addSubview(advertisingDescriptionText)
-        
-        scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
-        mainContainer.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor).isActive = true
-        mainContainer.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
-        mainContainer.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
-        mainContainerBottomConstraint = mainContainer.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: -(tabBarController?.tabBar.frame.height)!)
-        mainContainerBottomConstraint.isActive = true
-        
-        locationLabel.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        locationLabel.topAnchor.constraint(equalTo: self.mainContainer.topAnchor, constant: 8).isActive = true
-        locationLabel.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor, constant: -24).isActive = true
-        locationLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        btnChooseLocation.topAnchor.constraint(equalTo: self.locationLabel.bottomAnchor, constant: 8).isActive = true
-        btnChooseLocation.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        btnChooseLocation.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor, multiplier: 16/40).isActive = true
-        btnChooseLocation.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        divider1.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        divider1.topAnchor.constraint(equalTo: self.btnChooseLocation.bottomAnchor, constant: 8).isActive = true
-        divider1.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor, constant: -24).isActive = true
-        divider1.heightAnchor.constraint(equalToConstant: 0.75).isActive = true
-        
-        imageTextView.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        imageTextView.topAnchor.constraint(equalTo: self.divider1.bottomAnchor, constant: 8).isActive = true
-        imageTextView.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor, constant: -24).isActive = true
-        imageTextView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        
-        imageCollectionView.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor).isActive = true
-        imageCollectionView.topAnchor.constraint(equalTo: self.imageTextView.bottomAnchor, constant: 1).isActive = true
-        imageCollectionView.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor).isActive = true
-        imageCollectionViewHeightConstraint = imageCollectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
-        NSLayoutConstraint.activate([self.imageCollectionViewHeightConstraint])
-        reloadImageCollectionView()
-        
-        divider2.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        divider2.topAnchor.constraint(equalTo: self.imageCollectionView.bottomAnchor, constant: 8).isActive = true
-        divider2.widthAnchor.constraint(equalTo: self.mainContainer.widthAnchor, constant: -24).isActive = true
-        divider2.heightAnchor.constraint(equalToConstant: 0.75).isActive = true
-        
-        advertisingPhoneNumLabel.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        advertisingPhoneNumLabel.topAnchor.constraint(equalTo: self.divider2.bottomAnchor, constant: 8).isActive = true
-        advertisingPhoneNumLabel.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
-        advertisingPhoneNumLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        phoneNumTextFiled.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        phoneNumTextFiled.topAnchor.constraint(equalTo: self.advertisingPhoneNumLabel.bottomAnchor).isActive = true
-        phoneNumTextFiled.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
-        phoneNumTextFiled.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        phoneNumTextFiled.delegate = self
-        
-        pricaLabel.leftAnchor.constraint(equalTo: self.divider2.leftAnchor).isActive = true
-        pricaLabel.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
-        pricaLabel.topAnchor.constraint(equalTo: self.phoneNumTextFiled.bottomAnchor, constant: 8).isActive = true
-        pricaLabel.heightAnchor.constraint(equalTo: self.advertisingPhoneNumLabel.heightAnchor).isActive = true
-        
-        priceTextField.leftAnchor.constraint(equalTo: self.phoneNumTextFiled.leftAnchor).isActive = true
-        priceTextField.rightAnchor.constraint(equalTo: self.phoneNumTextFiled.rightAnchor).isActive = true
-        priceTextField.topAnchor.constraint(equalTo: self.pricaLabel.bottomAnchor).isActive = true
-        priceTextField.heightAnchor.constraint(equalTo: self.phoneNumTextFiled.heightAnchor).isActive = true
-        priceTextField.delegate = self
-        
-        divider3.leftAnchor.constraint(equalTo: self.divider2.leftAnchor).isActive = true
-        divider3.topAnchor.constraint(equalTo: self.priceTextField.bottomAnchor, constant: 16).isActive = true
-        divider3.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
-        divider3.heightAnchor.constraint(equalToConstant: 0.75).isActive = true
-        
-        advertisingTitleLabel.rightAnchor.constraint(equalTo: self.pricaLabel.rightAnchor).isActive = true
-        advertisingTitleLabel.leftAnchor.constraint(equalTo: self.pricaLabel.leftAnchor).isActive = true
-        advertisingTitleLabel.topAnchor.constraint(equalTo: self.divider3.bottomAnchor, constant: 10).isActive = true
-        advertisingTitleLabel.heightAnchor.constraint(equalTo: self.pricaLabel.heightAnchor).isActive = true
-        
-        advertisingTitleTextField.topAnchor.constraint(equalTo: self.advertisingTitleLabel.bottomAnchor).isActive = true
-        advertisingTitleTextField.leftAnchor.constraint(equalTo: self.priceTextField.leftAnchor).isActive = true
-        advertisingTitleTextField.rightAnchor.constraint(equalTo: self.priceTextField.rightAnchor).isActive = true
-        advertisingTitleTextField.heightAnchor.constraint(equalTo: self.priceTextField.heightAnchor).isActive = true
-        advertisingTitleTextField.delegate = self
-        
-        advertisingDescriptionLabel.rightAnchor.constraint(equalTo: self.pricaLabel.rightAnchor).isActive = true
-        advertisingDescriptionLabel.leftAnchor.constraint(equalTo: self.pricaLabel.leftAnchor).isActive = true
-        advertisingDescriptionLabel.topAnchor.constraint(equalTo: self.advertisingTitleTextField.bottomAnchor, constant: 8).isActive = true
-        advertisingDescriptionLabel.heightAnchor.constraint(equalTo: self.pricaLabel.heightAnchor).isActive = true
-        
-        advertisingDescriptionTextField.topAnchor.constraint(equalTo: self.advertisingDescriptionLabel.bottomAnchor).isActive = true
-        advertisingDescriptionTextField.leftAnchor.constraint(equalTo: self.priceTextField.leftAnchor).isActive = true
-        advertisingDescriptionTextField.rightAnchor.constraint(equalTo: self.priceTextField.rightAnchor).isActive = true
-        advertisingDescriptionTextField.heightAnchor.constraint(equalTo: self.priceTextField.heightAnchor).isActive = true
-        advertisingDescriptionTextField.delegate = self
-        
-        advertisingDescriptionText.rightAnchor.constraint(equalTo: self.pricaLabel.rightAnchor, constant: -8).isActive = true
-        advertisingDescriptionText.leftAnchor.constraint(equalTo: self.pricaLabel.leftAnchor, constant: 8).isActive = true
-        advertisingDescriptionText.topAnchor.constraint(equalTo: self.advertisingDescriptionTextField.bottomAnchor, constant: 14).isActive = true
-        
-        btnRegisterAdvertising.rightAnchor.constraint(equalTo: self.pricaLabel.rightAnchor).isActive = true
-        btnRegisterAdvertising.leftAnchor.constraint(equalTo: self.pricaLabel.leftAnchor).isActive = true
-        btnRegisterAdvertising.topAnchor.constraint(equalTo: self.advertisingDescriptionText.bottomAnchor, constant: 20).isActive = true
-        btnRegisterAdvertising.heightAnchor.constraint(equalTo: self.pricaLabel.heightAnchor).isActive = true
-        
-        btnRegisterAdvertising.bottomAnchor.constraint(equalTo: self.mainContainer.bottomAnchor).isActive = true
+        addViews()
+        addConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -464,20 +334,24 @@ class NewAdvertisingController: UIViewController, UIImagePickerControllerDelegat
         isViewDisapear = true
     }
     
-    @objc func didTapView(){
-        self.view.endEditing(true)
+    @objc   func btnChooseLocationTapped(_ sender: UIButton){
+        print("btn choose location tapped!")
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.darkRedLight.cgColor
-    }
     
-    @objc func keyboardWillHideNotification(_ notification: NSNotification) {
-        self.view.removeGestureRecognizer(viewTapRecognizer)
+    @objc   func btnRegisterAdTapped(_ sender: UIButton) {
+        let phoneNumber = self.phoneNumTextFiled.text
+        let price = self.priceTextField.text
+        let advertisingTitle = self.advertisingTitleTextField.text
+        let advertisingDescription = self.advertisingDescriptionTextField.text
+        
+        if let phoneNumber = phoneNumber, let price = price, let advertisingTitle = advertisingTitle, let advertisingDescription = advertisingDescription {
+            if phoneNumber.isEmpty || price.isEmpty || advertisingTitle.isEmpty || advertisingDescription.isEmpty {
+                print("fill in the blank!")
+            } else {
+                print("all text field is full!")
+            }
+        }
     }
-    
-    @objc func keyboardWillShowNotification(_ notification: NSNotification) {
-        viewTapRecognizer.addTarget(self, action: #selector(didTapView))
-        self.view.addGestureRecognizer(viewTapRecognizer)
-    }
+
 }
