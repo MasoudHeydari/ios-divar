@@ -12,6 +12,7 @@ class NewAdvertisingController: UIViewController {
     
     var i = 0
     
+    var imagePickerController: UIImagePickerController?
     
     var keyboardHeightLayoutConstraint: NSLayoutConstraint?
     let viewTapRecognizer = UITapGestureRecognizer()
@@ -313,6 +314,7 @@ class NewAdvertisingController: UIViewController {
     
     func setupViews() {
         view.backgroundColor = .white
+//        self.imagePickerController = UIImagePickerController()
         addViews()
         addConstraints()
     }
@@ -329,23 +331,26 @@ class NewAdvertisingController: UIViewController {
             reloadImageCollectionView()
             clearTextOfTextFields()
         }
+        
+        self.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         isViewDisapear = true
+        if self.imagePickerController == nil {
+            self.imagePickerController = UIImagePickerController()
+        }
     }
     
     @objc   func btnChooseLocationTapped(_ sender: UIButton){
         print("btn choose location tapped!")
         
-        // init YourViewController
         let chooseLocationVC = PopupChooseLocationViewController()
-        // Init popup view controller with content is your content view controller
+        chooseLocationVC.delegate = self
+        
         let popupVC = CustomPopupViewController(contentController: chooseLocationVC, popupWidth: (22 / 30) * view.frame.width, popupHeight: (25 / 30) * view.frame.height)
-        // show it by call present(_ , animated:) method from a current UIViewController
         popupVC.backgroundAlpha = 0.3
         popupVC.backgroundColor = .black
-        popupVC.delegate = self
         popupVC.canTapOutsideToDismiss = true
         popupVC.cornerRadius = 10
         popupVC.shadowEnabled = true
@@ -560,27 +565,30 @@ extension NewAdvertisingController {
 extension NewAdvertisingController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     public func chooseImage(){
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        
-        let actionSheet = UIAlertController(title: Const.popupText.imageGalleryTitle, message: Const.popupText.imageGalleryMessage, preferredStyle: .alert)
-        actionSheet.addAction(UIAlertAction(title: Const.popupText.camera, style: .default, handler: { (action: UIAlertAction) in
-            imagePickerController.sourceType = .camera
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: Const.popupText.gallery, style: .default, handler: { (action: UIAlertAction) in
-            imagePickerController.sourceType = .photoLibrary
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
-        
-        actionSheet.addAction(UIAlertAction(title: Const.popupText.cancel, style: .cancel, handler: nil))
-        
-        DispatchQueue.main.async {
-            self.present(actionSheet, animated: true) {
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-                actionSheet.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        if let imagePickerController = imagePickerController {
+            
+            
+            imagePickerController.delegate = self
+            imagePickerController.allowsEditing = true
+            
+            let actionSheet = UIAlertController(title: Const.popupText.imageGalleryTitle, message: Const.popupText.imageGalleryMessage, preferredStyle: .alert)
+            actionSheet.addAction(UIAlertAction(title: Const.popupText.camera, style: .default, handler: { (action: UIAlertAction) in
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
+            
+            actionSheet.addAction(UIAlertAction(title: Const.popupText.gallery, style: .default, handler: { (action: UIAlertAction) in
+                imagePickerController.sourceType = .photoLibrary
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
+            
+            actionSheet.addAction(UIAlertAction(title: Const.popupText.cancel, style: .cancel, handler: nil))
+            
+            DispatchQueue.main.async {
+                self.present(actionSheet, animated: true) {
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+                    actionSheet.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+                }
             }
         }
     }
@@ -727,11 +735,8 @@ extension NewAdvertisingController: UITextFieldDelegate {
     
 }
 
-
-extension NewAdvertisingController: CustomPopupViewControllerDelegate {
-    func popupViewControllerDidDismiss(sender: CustomPopupViewController) {
-        i = i + 1
-        btnChooseLocation.setTitle(Const.TempText.qazvin + " \(i)", for: .normal)
+extension NewAdvertisingController: TableViewItemSelectionDelegate {
+    func tableViewClicked(indexPath: IndexPath, province: String) {
+        btnChooseLocation.setTitle(province, for: .normal)
     }
-    
 }

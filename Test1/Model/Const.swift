@@ -120,6 +120,7 @@ struct Const {
         static let allAdvertisingCell = "advertising_cell_id"
         static let imageCell = "image_cell"
         static let imageEmptyCell = "image_empty_cell"
+        static let popChooseLocationCellId = "popup_Chooce_location_cell_id"
     }
     
     struct BtnTitle {

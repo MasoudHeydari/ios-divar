@@ -10,12 +10,13 @@ import UIKit
 
 protocol CustomPopupViewControllerDelegate: class {
     /// It is called when pop up is dismissed by tap outside
-    func popupViewControllerDidDismiss(sender: CustomPopupViewController)
+    func popupViewControllerDidDismiss(sender: UIViewController)
+    func popupViewControllerDidTouchedInsideView()
 }
 
 // optional func
 extension CustomPopupViewControllerDelegate {
-    func popupViewControllerDidDismiss(sender: CustomPopupViewController) {}
+    //    func popupViewControllerDidDismiss(sender: CustomPopupViewController) {}
 }
 
 public class CustomPopupViewController: UIViewController {
@@ -127,19 +128,13 @@ public class CustomPopupViewController: UIViewController {
         guard let location = touch?.location(in: self.view) else { return }
         if !containerView.frame.contains(location) {
             print("Tapped outside the custom popup")
-            self.delegate?.popupViewControllerDidDismiss(sender: self)
-            self.dismiss(animated: true)
+            if let contentController = self.contentController {
+                self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+                self.dismiss(animated: true)
+            }
         }else {
             print("Tapped inside the custom popup")
         }
-    }
-    
-    
-    // MARK: - Setup
-    private func addDismissGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTapGesture(gesture:)))
-        tapGesture.delegate = self
-        view.addGestureRecognizer(tapGesture)
     }
     
     private func setupUI() {
@@ -269,29 +264,24 @@ public class CustomPopupViewController: UIViewController {
         containerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: offset).isActive = true
         containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: offset).isActive = true
     }
-    
-    // MARK: - Actions
-    @objc func dismissTapGesture(gesture: UIGestureRecognizer) {
-//        dismiss(animated: true) {
-//            print(1)
-//            self.delegate?.popupViewControllerDidDismiss(sender: self)
-//        }
-    }
 }
 
-// MARK: - UIGestureRecognizerDelegate
-extension CustomPopupViewController: UIGestureRecognizerDelegate {
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        print(2)
-        guard let touchView = touch.view, canTapOutsideToDismiss else {
-            return false
-        }
-        if !touchView.isDescendant(of: containerView){
-            dismiss(animated: true) {
-                self.delegate?.popupViewControllerDidDismiss(sender: self)
-            }
-        }
-        
-        return !touchView.isDescendant(of: containerView)
-    }
-}
+
+
+//
+//// MARK: - UIGestureRecognizerDelegate
+//extension CustomPopupViewController: UIGestureRecognizerDelegate {
+//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        print(2)
+//        guard let touchView = touch.view, canTapOutsideToDismiss else {
+//            return false
+//        }
+//        if !touchView.isDescendant(of: containerView){
+//            dismiss(animated: true) {
+//                self.delegate?.popupViewControllerDidDismiss(sender: self)
+//            }
+//        }
+//
+//        return !touchView.isDescendant(of: containerView)
+//    }
+//}

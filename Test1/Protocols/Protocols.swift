@@ -10,3 +10,7 @@ import UIKit
 
 protocol MainTabBarDelegate: class {
 }
+
+protocol TableViewItemSelectionDelegate: class {
+    func tableViewClicked(indexPath: IndexPath, province: String)
+}
