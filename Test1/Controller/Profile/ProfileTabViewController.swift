@@ -12,7 +12,7 @@ class ProfileTabController: UIViewController {
     
     let btnLogin: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.setTitle("ورود", for: .normal)
+        btn.setTitle(Const.BtnTitle.login, for: .normal)
         btn.layer.cornerRadius = 6
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.clipsToBounds = true
@@ -30,7 +30,7 @@ class ProfileTabController: UIViewController {
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "برای استفاده از تمامی امکانات دیوار، وارد حساب کاربری‌تان شوید."
+        label.text = Const.Pages.ProfilePage.loginToAccount
         label.numberOfLines = 2
         label.textColor = UIColor.Gray.textGrayDark
         return label
@@ -46,7 +46,7 @@ class ProfileTabController: UIViewController {
         btn.setTitleColor(UIColor.Gray.textGrayDark, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage.resizeImage(image: UIImage(named: Const.Image.userProfileSolid), targetSize: CGSize(width: 25, height: 25)), for: .normal)
-        btn.setTitle("آگهی‌های من", for: .normal)
+        btn.setTitle(Const.Pages.ProfilePage.myAdvertisings, for: .normal)
         btn.setBackgroundColor(color: UIColor.Gray.light0, forState: .highlighted)
         btn.addTarget(self, action: #selector(btnMyAdvertisingsTapped(_ :)), for: .touchUpInside)
         return btn
@@ -55,7 +55,7 @@ class ProfileTabController: UIViewController {
     let btnFavAdertisings: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("نشان شده‌ها", for: .normal)
+        btn.setTitle(Const.Pages.ProfilePage.favAdvertisings, for: .normal)
         btn.setTitleColor(UIColor.Gray.textGrayDark, for: .normal)
         btn.setImage(UIImage.resizeImage(image: UIImage(named: Const.Image.favorite), targetSize: CGSize(width: 25, height: 25)), for: .normal)
         btn.contentVerticalAlignment = .center
@@ -78,7 +78,7 @@ class ProfileTabController: UIViewController {
     let btnAboutDivar: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("درباره دیوار   ۱.۰.۰", for: .normal)
+        btn.setTitle(Const.Pages.ProfilePage.aboutDivar, for: .normal)
         btn.setTitleColor(UIColor.Gray.textGrayDark, for: .normal)
         btn.setImage(UIImage.resizeImage(image: UIImage(named: Const.Image.aboutDivar), targetSize: CGSize(width: 25, height: 25)), for: .normal)
         btn.contentVerticalAlignment = .center
@@ -94,7 +94,7 @@ class ProfileTabController: UIViewController {
     let btnAboutUs: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("درباره ما", for: .normal)
+        btn.setTitle(Const.Pages.ProfilePage.aboutUs, for: .normal)
         btn.setTitleColor(UIColor.Gray.textGrayDark, for: .normal)
         btn.setImage(UIImage.resizeImage(image: UIImage(named: Const.Image.aboutUs), targetSize: CGSize(width: 25, height: 25)), for: .normal)
         btn.contentVerticalAlignment = .center
@@ -161,8 +161,8 @@ class ProfileTabController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.title = "پروفایل من"
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.title = Const.NavTitle.myProfile
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -9,13 +9,13 @@
 import UIKit
 
 class AllAdvertisingsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    private let cellId = "advertising_cell_id"
+    
     private var advertisingList = [String]()
     
     lazy var noInternetLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "خطا در اتصال به سرور"
+        label.text = Const.Pages.AllADPage.noInternetConnection
         label.textAlignment = .center
         label.backgroundColor = .yellow
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped(_ :)))
@@ -49,7 +49,7 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
         if Utils.checkInternetConnection() {
             noInternetLabel.removeFromSuperview()
             if advertisingList.isEmpty {
-                advertisingList.append("masoud")
+                advertisingList.append("new cell")
                 collectionView.reloadData()
             }
         } else {
@@ -71,13 +71,13 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     private func setupCollectionView(){
         collectionView.alwaysBounceVertical = true
         collectionView.backgroundColor = .white
-        collectionView.register(AdvertisingCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(AdvertisingCell.self, forCellWithReuseIdentifier: Const.Id.allAdvertisingCell)
     }
     
     private func setupNavController(){
-        self.navigationItem.backBarButtonItem?.title = ""
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.title = "همه آگهی ها"
+        self.navigationItem.backBarButtonItem?.title = Const.empty
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)
+        navigationItem.title = Const.NavTitle.allAdvertisings
         
     }
     
@@ -90,7 +90,7 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Const.Id.allAdvertisingCell, for: indexPath)
         
         return cell
     }
@@ -102,8 +102,5 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-    public func checkInternetConnection() -> Bool{
-        return true
-    }
+
 }

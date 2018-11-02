@@ -32,6 +32,6 @@ class MyFavAdvertisingsViewController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.title = "نشان شده‌ها"
+        navigationItem.title = Const.NavTitle.favAdvertisings
     }
 }

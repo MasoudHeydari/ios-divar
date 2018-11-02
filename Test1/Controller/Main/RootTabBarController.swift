@@ -30,17 +30,17 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
         let layout = UICollectionViewFlowLayout()
         let allAdvertisingsController = AllAdvertisingsController(collectionViewLayout: layout)
         let allAdvertisingsNavController = CustomNavigationController(rootViewController: allAdvertisingsController)
-        allAdvertisingsNavController.tabBarItem.title = "آگهی ها"
+        allAdvertisingsNavController.tabBarItem.title = Const.TabBarTitle.allAdvertising
         allAdvertisingsNavController.tabBarItem.image = UIImage(named: Const.Image.advertising)
         
         let profileController = ProfileTabController()
         let profileNavController = CustomNavigationController(rootViewController: profileController)
-        profileNavController.tabBarItem.title = "پروفایل"
+        profileNavController.tabBarItem.title = Const.TabBarTitle.profile
         profileNavController.tabBarItem.image = UIImage(named: Const.Image.userProfileBorder)
         
         let newAdvertising = NewAdvertisingController()
         let newAdvertisingNavController = CustomNavigationController(rootViewController: newAdvertising)
-        newAdvertisingNavController.tabBarItem.title = "آگهی جدید"
+        newAdvertisingNavController.tabBarItem.title = Const.TabBarTitle.newAdvertising
         
         viewControllers = [
             profileNavController,

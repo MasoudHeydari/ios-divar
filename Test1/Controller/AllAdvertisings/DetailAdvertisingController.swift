@@ -51,7 +51,7 @@ class DetailAdvertisingController: UIViewController {
     
     let btnCallToSeller: UIButton = {
         let btn = UIButton()
-        btn.setTitle("تماس با فروشنده", for: .normal)
+        btn.setTitle(Const.BtnTitle.callToSeller, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         btn.backgroundColor = darkRed
         btn.layer.cornerRadius = 8
@@ -80,7 +80,7 @@ class DetailAdvertisingController: UIViewController {
     
     let advertisingLabel: UILabel = {
         let label = UILabel()
-        label.text = "فروش ویلای شمال (نقد - اقساط) یا معاوضه با آپارتمان برای مشاوره با کادر مجرب ما میتوانید با یکی از شماره یزر تماس بگیرید مشاور املاک حیدری"
+        label.text = Const.Pages.AdvertisingDetails.fakeAdvertisingTitle
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = UIColor(red: 3/255, green: 3/255, blue: 3/255, alpha: 1)
@@ -92,7 +92,7 @@ class DetailAdvertisingController: UIViewController {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "دقایقی پیش"
+        label.text = Const.Pages.AdvertisingDetails.fakeTime
         label.backgroundColor = .white
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +108,7 @@ class DetailAdvertisingController: UIViewController {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
-        label.text = "محل: "
+        label.text = Const.Pages.AdvertisingDetails.location
         return label
     }()
     
@@ -117,7 +117,7 @@ class DetailAdvertisingController: UIViewController {
         label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .right
-        label.text = "تهران جنت آباد مرکزی"
+        label.text = Const.Pages.AdvertisingDetails.fakeLocation
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor(red: 10/255, green: 10/255, blue: 10/255, alpha: 1)
         return label
@@ -129,7 +129,7 @@ class DetailAdvertisingController: UIViewController {
         label.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "قیمت: "
+        label.text = Const.Pages.AdvertisingDetails.price
         label.textAlignment = .left
         return label
     }()
@@ -140,7 +140,7 @@ class DetailAdvertisingController: UIViewController {
         label.textColor = UIColor(red: 10/255, green: 10/255, blue: 10/255, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "۷۲۰۰۰۰۰۰۰ تومان"
+        label.text = Const.Pages.AdvertisingDetails.fakePrice
         label.textAlignment = .right
         return label
     }()
@@ -165,7 +165,7 @@ class DetailAdvertisingController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(red: 37/255, green: 37/255, blue: 37/255, alpha: 1)
         label.backgroundColor = .white
-        let text = "سیبانه یک استاندارد جدید برای استفاده از پیشرفته ترین اسمارت فون جهان تعریف کرده است. این استاندارد جدید باعث شده است که کاربران ایرانی توانایی بیشتری برای استفاده از محصولات اپل داشته باشند. سیبانه اپ استور اپل را بصورت هوشمندانه و براساس نیازهای کاربران ایرانی بازطراحی کرده و در قالب اپ استور ایرانی نرم افزارهای اورجینال iOS در اختیار کاربران ایرانی قرار داده است."
+        let text = Const.Pages.AdvertisingDetails.fakeAdvertisingDescription
         
         label.addSpaceBetweenLines(string: text, spacing: 4.0)
         return label
@@ -284,7 +284,7 @@ class DetailAdvertisingController: UIViewController {
     
     private func setupView(){
         view.backgroundColor = .yellow
-        navigationItem.title = "جزییات آگهی"
+        navigationItem.title = Const.NavTitle.AdvertisingDetails
     }
     
     @objc private func btnFavoriteTapped(_ sender: UIButton){
@@ -307,7 +307,7 @@ class DetailAdvertisingController: UIViewController {
     
     @objc private func btnCallToSellerTapped(_ sender: UIButton){
         print("btn call to seller tapped!")
-        Utils.callToPhoneNumber(phoneNumber: "09195474883")
+        Utils.callToPhoneNumber(phoneNumber: Const.TempText.phoneNumber)
         
     }
 }

@@ -13,7 +13,7 @@ import UIKit
 class MyAdvertisingsViewController: UIViewController {
     let label: UILabel = {
         let label = UILabel()
-        label.text = "بخش 'آگهی‌های من' بزودی بروز رسانی می شود"
+        label.text = Const.TempText.myAdvertisings
         label.textColor = .darkRedLight
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -34,7 +34,7 @@ class MyAdvertisingsViewController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.title = "آگهی‌های من"
+        navigationItem.title = Const.NavTitle.myAdvertisings
     }
 }
 

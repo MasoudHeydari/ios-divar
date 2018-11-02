@@ -32,6 +32,6 @@ class AboutUsViewController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.title = "درباره ما"
+        navigationItem.title = Const.NavTitle.aboutUs
     }
 }

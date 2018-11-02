@@ -9,6 +9,16 @@
 import UIKit
 
 extension UIView {
+    
+    var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    
     func drawDot(x: CGFloat, y: CGFloat ) {
         let dotPath = UIBezierPath(ovalIn: CGRect(x: x, y: y, width: 5, height: 5))
         
@@ -113,7 +123,7 @@ extension UIView {
         
         return height
     }
-
+    
     
     func addDashedBoarder()  {
         let view = CAShapeLayer()
@@ -130,3 +140,5 @@ extension UIView {
         self.layer.addSublayer(view)
     }
 }
+
+

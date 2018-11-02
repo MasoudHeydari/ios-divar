@@ -18,11 +18,11 @@
 		9508F194217245CA00A5F4E0 /* UIView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508F193217245CA00A5F4E0 /* UIView+Helper.swift */; };
 		9508F19621724A1A00A5F4E0 /* AdvertisingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */; };
 		9524FBCD218181A700650937 /* MainTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524FBCC218181A700650937 /* MainTabBarProtocol.swift */; };
+		9553BCFE218B9594001B28F7 /* PopupChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553BCFD218B9594001B28F7 /* PopupChooseLocationViewController.swift */; };
 		957FC84521710CB10011CD8C /* UIButton+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC84421710CB10011CD8C /* UIButton+Helper.swift */; };
 		957FC847217127650011CD8C /* NewAdvertisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC846217127650011CD8C /* NewAdvertisingController.swift */; };
 		95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */; };
 		95C563E1217906A60084C265 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C563E0217906A60084C265 /* UIImageView+Helper.swift */; };
-		95CC6ADC2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */; };
 		95CE1A072175A76300673470 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A062175A76300673470 /* Utils.swift */; };
 		95CE1A092175A78700673470 /* UILabel+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A082175A78700673470 /* UILabel+Helper.swift */; };
 		95D92A052171AF4F0019FAFF /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */; };
@@ -36,6 +36,11 @@
 		95E8EE4B217E01B300735627 /* MyFavAdvertisingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4A217E01B300735627 /* MyFavAdvertisingViewController.swift */; };
 		95E8EE4D217E01CF00735627 /* AboutDivarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4C217E01CF00735627 /* AboutDivarViewController.swift */; };
 		95E8EE4F217E01E100735627 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4E217E01E100735627 /* AboutUsViewController.swift */; };
+		95E9A3E4218B643100274016 /* CustomPopupVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */; };
+		95FF44C0218726E5005E83FE /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */; };
+		95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C12187274D005E83FE /* KeychainWrapper.swift */; };
+		95FF44C521874908005E83FE /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C421874908005E83FE /* BaseService.swift */; };
+		95FF44C721874977005E83FE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C621874977005E83FE /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,11 +57,11 @@
 		9508F193217245CA00A5F4E0 /* UIView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Helper.swift"; sourceTree = "<group>"; };
 		9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisingModel.swift; sourceTree = "<group>"; };
 		9524FBCC218181A700650937 /* MainTabBarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarProtocol.swift; sourceTree = "<group>"; };
+		9553BCFD218B9594001B28F7 /* PopupChooseLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupChooseLocationViewController.swift; sourceTree = "<group>"; };
 		957FC84421710CB10011CD8C /* UIButton+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Helper.swift"; sourceTree = "<group>"; };
 		957FC846217127650011CD8C /* NewAdvertisingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingController.swift; sourceTree = "<group>"; };
 		95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingImageCell.swift; sourceTree = "<group>"; };
 		95C563E0217906A60084C265 /* UIImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helper.swift"; sourceTree = "<group>"; };
-		95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewAdvertisingViewController+Hekper.swift"; sourceTree = "<group>"; };
 		95CE1A062175A76300673470 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		95CE1A082175A78700673470 /* UILabel+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Helper.swift"; sourceTree = "<group>"; };
 		95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
@@ -70,6 +75,11 @@
 		95E8EE4A217E01B300735627 /* MyFavAdvertisingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavAdvertisingViewController.swift; sourceTree = "<group>"; };
 		95E8EE4C217E01CF00735627 /* AboutDivarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDivarViewController.swift; sourceTree = "<group>"; };
 		95E8EE4E217E01E100735627 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupVeiwController.swift; sourceTree = "<group>"; };
+		95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		95FF44C12187274D005E83FE /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		95FF44C421874908005E83FE /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		95FF44C621874977005E83FE /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		DF4EDA1242B80893DFA07382 /* Pods_Test1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F9D7D341AC4FD2AE32B11D /* Pods-Test1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test1.release.xcconfig"; path = "Pods/Target Support Files/Pods-Test1/Pods-Test1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,14 +134,15 @@
 		9506DFFC2170B03B002A6FFC /* Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				95FF44C3218748EF005E83FE /* API */,
 				9524FBCB2181817600650937 /* Protocols */,
 				957FC849217128300011CD8C /* View */,
 				95BF336E21721BBC00050769 /* Model */,
 				957FC848217127970011CD8C /* Controller */,
 				95D92A0C2171BD340019FAFF /* Extension */,
 				9506DFFD2170B03B002A6FFC /* AppDelegate.swift */,
-				9506E0042170B03D002A6FFC /* Assets.xcassets */,
 				9506E0062170B03D002A6FFC /* LaunchScreen.storyboard */,
+				9506E0042170B03D002A6FFC /* Assets.xcassets */,
 				9506E0092170B03D002A6FFC /* Info.plist */,
 			);
 			path = Test1;
@@ -164,6 +175,29 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		959978BF2186D73D00B9DAD0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9508F193217245CA00A5F4E0 /* UIView+Helper.swift */,
+				957FC84421710CB10011CD8C /* UIButton+Helper.swift */,
+				95C563E0217906A60084C265 /* UIImageView+Helper.swift */,
+				95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */,
+				95CE1A082175A78700673470 /* UILabel+Helper.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		959978C02186D75800B9DAD0 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				95D92A0D2171D2030019FAFF /* UIColor+Helper.swift */,
+				95CE1A062175A76300673470 /* Utils.swift */,
+				95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */,
+				95FF44C12187274D005E83FE /* KeychainWrapper.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		95BF336E21721BBC00050769 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,13 +220,9 @@
 		95D92A0C2171BD340019FAFF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				9508F193217245CA00A5F4E0 /* UIView+Helper.swift */,
-				957FC84421710CB10011CD8C /* UIButton+Helper.swift */,
-				95C563E0217906A60084C265 /* UIImageView+Helper.swift */,
-				95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */,
-				95CE1A082175A78700673470 /* UILabel+Helper.swift */,
-				95D92A0D2171D2030019FAFF /* UIColor+Helper.swift */,
-				95CE1A062175A76300673470 /* Utils.swift */,
+				95E9A3E2218B641800274016 /* controller */,
+				959978BF2186D73D00B9DAD0 /* view */,
+				959978C02186D75800B9DAD0 /* utils */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -210,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				957FC846217127650011CD8C /* NewAdvertisingController.swift */,
-				95CC6ADB2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift */,
+				9553BCFD218B9594001B28F7 /* PopupChooseLocationViewController.swift */,
 			);
 			path = NewAdvertising;
 			sourceTree = "<group>";
@@ -235,6 +265,23 @@
 				95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		95E9A3E2218B641800274016 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		95FF44C3218748EF005E83FE /* API */ = {
+			isa = PBXGroup;
+			children = (
+				95FF44C421874908005E83FE /* BaseService.swift */,
+				95FF44C621874977005E83FE /* APIService.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,8 +413,11 @@
 			files = (
 				95E8EE49217DF93F00735627 /* LoginAndRegisterViewController.swift in Sources */,
 				9508F194217245CA00A5F4E0 /* UIView+Helper.swift in Sources */,
+				95FF44C721874977005E83FE /* APIService.swift in Sources */,
 				957FC847217127650011CD8C /* NewAdvertisingController.swift in Sources */,
 				9508F19621724A1A00A5F4E0 /* AdvertisingModel.swift in Sources */,
+				95FF44C521874908005E83FE /* BaseService.swift in Sources */,
+				95E9A3E4218B643100274016 /* CustomPopupVeiwController.swift in Sources */,
 				9506E0002170B03B002A6FFC /* RootTabBarController.swift in Sources */,
 				9506E0102170B188002A6FFC /* AllAdvertisingsController.swift in Sources */,
 				95CE1A072175A76300673470 /* Utils.swift in Sources */,
@@ -380,6 +430,7 @@
 				95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */,
 				95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */,
 				9506DFFE2170B03B002A6FFC /* AppDelegate.swift in Sources */,
+				95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */,
 				9524FBCD218181A700650937 /* MainTabBarProtocol.swift in Sources */,
 				95D92A0E2171D2030019FAFF /* UIColor+Helper.swift in Sources */,
 				95E8EE4F217E01E100735627 /* AboutUsViewController.swift in Sources */,
@@ -387,9 +438,10 @@
 				95E8EE47217DF36800735627 /* MyAdvertisingsViewController.swift in Sources */,
 				95D92A0B2171B3330019FAFF /* BaseCell.swift in Sources */,
 				95D92A052171AF4F0019FAFF /* CustomNavigationController.swift in Sources */,
+				95FF44C0218726E5005E83FE /* KeychainItemAccessibility.swift in Sources */,
+				9553BCFE218B9594001B28F7 /* PopupChooseLocationViewController.swift in Sources */,
 				95E8EE4B217E01B300735627 /* MyFavAdvertisingViewController.swift in Sources */,
 				95E8EE45217DE51700735627 /* Const.swift in Sources */,
-				95CC6ADC2183736D007FD754 /* NewAdvertisingViewController+Hekper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

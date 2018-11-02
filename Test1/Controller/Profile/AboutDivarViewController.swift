@@ -32,6 +32,6 @@ class AboutDivarViewController: UIViewController {
     }
     
     private func setupNavBar(){
-        navigationItem.title = "درباره دیوار"
+        navigationItem.title = Const.NavTitle.aboutDivar
     }
 }
