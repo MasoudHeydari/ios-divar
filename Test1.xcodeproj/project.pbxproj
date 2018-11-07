@@ -19,6 +19,7 @@
 		9508F19621724A1A00A5F4E0 /* AdvertisingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */; };
 		9524FBCD218181A700650937 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9524FBCC218181A700650937 /* Protocols.swift */; };
 		9553BCFE218B9594001B28F7 /* PopupChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553BCFD218B9594001B28F7 /* PopupChooseLocationViewController.swift */; };
+		955E63AD2192EC8C00B44115 /* UITextView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E63AC2192EC8C00B44115 /* UITextView+Helper.swift */; };
 		957FC84521710CB10011CD8C /* UIButton+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC84421710CB10011CD8C /* UIButton+Helper.swift */; };
 		957FC847217127650011CD8C /* NewAdvertisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC846217127650011CD8C /* NewAdvertisingController.swift */; };
 		95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */; };
@@ -31,6 +32,7 @@
 		95D92A0B2171B3330019FAFF /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D92A0A2171B3330019FAFF /* BaseCell.swift */; };
 		95D92A0E2171D2030019FAFF /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D92A0D2171D2030019FAFF /* UIColor+Helper.swift */; };
 		95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */; };
+		95DB3D6C21901A23009D2E9D /* UIView+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB3D6B21901A23009D2E9D /* UIView+Toast.swift */; };
 		95E8EE45217DE51700735627 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE44217DE51700735627 /* Const.swift */; };
 		95E8EE47217DF36800735627 /* MyAdvertisingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE46217DF36800735627 /* MyAdvertisingsViewController.swift */; };
 		95E8EE49217DF93F00735627 /* LoginAndRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE48217DF93F00735627 /* LoginAndRegisterViewController.swift */; };
@@ -59,6 +61,7 @@
 		9508F19521724A1A00A5F4E0 /* AdvertisingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisingModel.swift; sourceTree = "<group>"; };
 		9524FBCC218181A700650937 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		9553BCFD218B9594001B28F7 /* PopupChooseLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupChooseLocationViewController.swift; sourceTree = "<group>"; };
+		955E63AC2192EC8C00B44115 /* UITextView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Helper.swift"; sourceTree = "<group>"; };
 		957FC84421710CB10011CD8C /* UIButton+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Helper.swift"; sourceTree = "<group>"; };
 		957FC846217127650011CD8C /* NewAdvertisingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingController.swift; sourceTree = "<group>"; };
 		95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingImageCell.swift; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		95D92A0A2171B3330019FAFF /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		95D92A0D2171D2030019FAFF /* UIColor+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Helper.swift"; sourceTree = "<group>"; };
+		95DB3D6B21901A23009D2E9D /* UIView+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Toast.swift"; sourceTree = "<group>"; };
 		95E8EE44217DE51700735627 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		95E8EE46217DF36800735627 /* MyAdvertisingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvertisingsViewController.swift; sourceTree = "<group>"; };
 		95E8EE48217DF93F00735627 /* LoginAndRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndRegisterViewController.swift; sourceTree = "<group>"; };
@@ -139,9 +143,9 @@
 				95BF336E21721BBC00050769 /* Model */,
 				957FC849217128300011CD8C /* View */,
 				957FC848217127970011CD8C /* Controller */,
+				9524FBCB2181817600650937 /* Protocols */,
 				95FF44C3218748EF005E83FE /* API */,
 				95D92A0C2171BD340019FAFF /* Extension */,
-				9524FBCB2181817600650937 /* Protocols */,
 				9506DFFD2170B03B002A6FFC /* AppDelegate.swift */,
 				9506E0062170B03D002A6FFC /* LaunchScreen.storyboard */,
 				9506E0042170B03D002A6FFC /* Assets.xcassets */,
@@ -181,10 +185,12 @@
 			isa = PBXGroup;
 			children = (
 				9508F193217245CA00A5F4E0 /* UIView+Helper.swift */,
+				95DB3D6B21901A23009D2E9D /* UIView+Toast.swift */,
 				957FC84421710CB10011CD8C /* UIButton+Helper.swift */,
 				95C563E0217906A60084C265 /* UIImageView+Helper.swift */,
 				95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */,
 				95CE1A082175A78700673470 /* UILabel+Helper.swift */,
+				955E63AC2192EC8C00B44115 /* UITextView+Helper.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -209,6 +215,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		95CAB17221906E0800C37C30 /* network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
 		95D92A072171B2B30019FAFF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +236,7 @@
 		95D92A0C2171BD340019FAFF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				95CAB17221906E0800C37C30 /* network */,
 				95E9A3E2218B641800274016 /* controller */,
 				959978BF2186D73D00B9DAD0 /* view */,
 				959978C02186D75800B9DAD0 /* utils */,
@@ -433,7 +447,9 @@
 				95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */,
 				95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */,
 				9506DFFE2170B03B002A6FFC /* AppDelegate.swift in Sources */,
+				95DB3D6C21901A23009D2E9D /* UIView+Toast.swift in Sources */,
 				95D8D8B5218CF584002EF37F /* PopupChooseLocationTableViewCell.swift in Sources */,
+				955E63AD2192EC8C00B44115 /* UITextView+Helper.swift in Sources */,
 				95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */,
 				9524FBCD218181A700650937 /* Protocols.swift in Sources */,
 				95D92A0E2171D2030019FAFF /* UIColor+Helper.swift in Sources */,

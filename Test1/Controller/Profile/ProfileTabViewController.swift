@@ -47,7 +47,7 @@ class ProfileTabController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage.resizeImage(image: UIImage(named: Const.Image.userProfileSolid), targetSize: CGSize(width: 25, height: 25)), for: .normal)
         btn.setTitle(Const.Pages.ProfilePage.myAdvertisings, for: .normal)
-        btn.setBackgroundColor(color: UIColor.Gray.light0, forState: .highlighted)
+        btn.setBackgroundColor(color: UIColor.Gray.light1, forState: .highlighted)
         btn.addTarget(self, action: #selector(btnMyAdvertisingsTapped(_ :)), for: .touchUpInside)
         return btn
     }()
@@ -63,7 +63,7 @@ class ProfileTabController: UIViewController {
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 15)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
         btn.semanticContentAttribute = .forceRightToLeft
-        btn.setBackgroundColor(color: UIColor.Gray.light0, forState: .highlighted)
+        btn.setBackgroundColor(color: UIColor.Gray.light1, forState: .highlighted)
         btn.addTarget(self, action: #selector(btnFavAdertisingsTapped(_ :)), for: .touchUpInside)
         return btn
     }()
@@ -86,11 +86,11 @@ class ProfileTabController: UIViewController {
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 15)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
         btn.semanticContentAttribute = .forceRightToLeft
-        btn.setBackgroundColor(color: UIColor.Gray.light0, forState: .highlighted)
+        btn.setBackgroundColor(color: UIColor.Gray.light1, forState: .highlighted)
         btn.addTarget(self, action: #selector(btnAboutDivarTapped(_:)), for: .touchUpInside)
         return btn
     }()
-
+    
     let btnAboutUs: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +102,7 @@ class ProfileTabController: UIViewController {
         btn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 15)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
         btn.semanticContentAttribute = .forceRightToLeft
-        btn.setBackgroundColor(color: UIColor.Gray.light0, forState: .highlighted)
+        btn.setBackgroundColor(color: UIColor.Gray.light1, forState: .highlighted)
         btn.addTarget(self, action: #selector(btnAboutUsTapped(_:)), for: .touchUpInside)
         return btn
     }()
@@ -167,11 +167,40 @@ class ProfileTabController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("profile appeard!")
+        changeBtnLogginTitle()
+        changeLoginLabelTitle()
     }
     
     @objc private func btnLoginTapped(_ sender: UIButton){
         print("btn login tapped!")
-        navigationController?.pushViewController(LoginAndRegisterViewController(), animated: true)
+        if let title = sender.titleLabel?.text {
+            if title == Const.BtnTitle.login {
+                navigationController?.pushViewController(LoginAndRegisterViewController(), animated: true)
+                
+            }else if title == Const.BtnTitle.logout {
+                KeychainWrapper.standard.removeObject(forKey: Const.API.isLoggedIn)
+                changeBtnLogginTitle()
+                changeLoginLabelTitle()
+            }
+        }
+    }
+    
+    private func changeBtnLogginTitle(){
+        print("API: \(APIService.shared.isLoggedIn())")
+        if APIService.shared.isLoggedIn() {
+            btnLogin.setTitle(Const.BtnTitle.logout, for: .normal)
+        } else {
+            btnLogin.setTitle(Const.BtnTitle.login, for: .normal)
+        }
+    }
+    
+    private func changeLoginLabelTitle(){
+        if APIService.shared.isLoggedIn() {
+            loginLabel.text = Const.Pages.ProfilePage.welcomeUser
+        } else {
+            loginLabel.text = Const.Pages.ProfilePage.loginToAccount
+            
+        }
     }
     
     @objc private func btnMyAdvertisingsTapped(_ sender: UIButton) {

@@ -10,7 +10,7 @@ import UIKit
 
 class AllAdvertisingsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private var advertisingList = [String]()
+    private var advertisingList = [AdvertisingModel]()
     
     lazy var noInternetLabel: UILabel = {
         let label = UILabel()
@@ -34,23 +34,20 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
         setupViews()
         setupNavController()
         setupCollectionView()
+        showAdvertisings()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("view apeared!")
-        showAdvertisings()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        // do sth here
     }
     
     private func showAdvertisings() {
         if Utils.checkInternetConnection() {
             noInternetLabel.removeFromSuperview()
             if advertisingList.isEmpty {
-                advertisingList.append("new cell")
-                collectionView.reloadData()
+                getAllAdvertisingFromServer()
             }
         } else {
             view.addSubview(noInternetLabel)
@@ -81,6 +78,17 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
         
     }
     
+    private func getAllAdvertisingFromServer(){
+        APIService.shared.getAllAdvertisingsFromServer { [weak self] (done, advertisingList) in
+            if done {
+                if let advertisingList = advertisingList {
+                    self?.advertisingList = advertisingList
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return advertisingList.count
     }
@@ -90,7 +98,8 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Const.Id.allAdvertisingCell, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Const.Id.allAdvertisingCell, for: indexPath) as! AdvertisingCell
+        cell.advertisingModel = advertisingList[indexPath.row]
         
         return cell
     }
@@ -104,3 +113,6 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     }
 
 }
+
+
+

@@ -126,15 +126,28 @@ public class CustomPopupViewController: UIViewController {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         guard let location = touch?.location(in: self.view) else { return }
-        if !containerView.frame.contains(location) {
+        if !(contentView?.frame.contains(location))! {
             print("Tapped outside the custom popup")
+        }else {
+            print("Tapped inside the custom popup")
             if let contentController = self.contentController {
                 self.delegate?.popupViewControllerDidDismiss(sender: contentController)
                 self.dismiss(animated: true)
             }
-        }else {
-            print("Tapped inside the custom popup")
         }
+        
+        //        let touch = touches.first
+        //        guard let location = touch?.location(in: self.view) else { return }
+        //        if !containerView.frame.contains(location) {
+        //            print("Tapped outside the custom popup")
+        //            if let contentController = self.contentController {
+        //                self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+        //                self.dismiss(animated: true)
+        //            }
+        //        }else {
+        //            print("Tapped inside the custom popup")
+        //        }
+        
     }
     
     private func setupUI() {

@@ -7,12 +7,50 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AdvertisingModel {
-    var title: String?
-    var description: String?
+    var advertising_id: UInt
+    var title: String
+    var date: String
+    var price: String
+    var location: String
+    
+    init(json: JSON) {
+        self.advertising_id = json["advertising_id"].uInt ?? 0
+        self.title = json["title"].string ?? Const.empty
+        self.date = json["date"].string ?? Const.empty
+        self.location = json["location"].string ?? Const.empty
+        self.price = json["price"].string ?? Const.empty
+        
+    }
+}
+
+class DetailAdvertisingModel {
+    var advertising_id: NSNumber?
+    var imgURL: String?
     var isFavorite: Bool?
-    var time: String?
+    var phoneNumber: String?
+    var title: String?
+    var date: String?
     var location: String?
     var price: String?
+    var description: String?
+    
+}
+
+class NewAdvertisingModel {
+    var title: String
+    var description: String
+    var phoneNumber: String
+    var location: String
+    var price: String
+    
+    init(title: String, description: String, phoneNumber: String, location: String, price: String) {
+        self.title = title
+        self.description = description
+        self.phoneNumber = phoneNumber
+        self.location = location
+        self.price = price
+    }
 }

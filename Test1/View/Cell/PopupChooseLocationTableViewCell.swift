@@ -28,7 +28,7 @@ class PopupChooseLocationTableViewCell: UITableViewCell {
     
     let divider: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.Gray.light1
+        view.backgroundColor = UIColor.Gray.light2
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

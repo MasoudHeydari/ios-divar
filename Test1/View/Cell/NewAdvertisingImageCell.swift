@@ -19,6 +19,22 @@ class NewAdvertisingImageCell: UICollectionViewCell {
         }
     }
     
+    var indexPath: IndexPath?
+    
+    weak var delegate : NewAdvertisingImageCollectionViewDelegate?
+    
+    let btnDelete: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.layer.cornerRadius = 12
+        btn.clipsToBounds = true
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        let img = UIImage(named: Const.Image.delete)
+        btn.setBackgroundColor(color: UIColor.Gray.light4, forState: .normal)
+        btn.setBackgroundColor(color: UIColor.Gray.light3, forState: .highlighted)
+        btn.setImage(img?.imageWithInsets(insetDimen: 16), for: .normal)
+        return btn
+    }()
+    
     let image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -42,11 +58,27 @@ class NewAdvertisingImageCell: UICollectionViewCell {
         self.backgroundColor = .white
         
         addSubview(image)
+        addSubview(btnDelete)
+        
         image.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 4).isActive = true
         image.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -4).isActive = true
         image.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
         image.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
         
+        btnDelete.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
+        btnDelete.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+        btnDelete.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        btnDelete.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        btnDelete.addTarget(self, action: #selector(btnDeleteTapped(_:)), for: .touchUpInside)
+
+        
+    }
+    
+    @objc private func btnDeleteTapped(_ sender: UIButton) {
+        print("btn delete tapped!")
+        if let indexPath = indexPath {
+            delegate?.deletImageTapped(indexPath: indexPath)
+        }
     }
 }
 

@@ -62,15 +62,49 @@ extension UIColor {
     
     struct Gray {
         static var light0: UIColor {
-            return UIColor(r: 245, g: 245, b: 245)
+            return UIColor(r: 250, g: 250, b: 250)
         }
+        
         static var light1: UIColor {
-            return UIColor(r: 230, g: 230, b: 230)
+            return UIColor(r: 240, g: 240, b: 240)
         }
         
         static var light2: UIColor {
-            return UIColor(r: 143, g: 143, b: 143)
+            return UIColor(r: 228, g: 228, b: 228)
         }
+        
+        static var light3: UIColor {
+            return UIColor(r: 215, g: 215, b: 215)
+        }
+        
+        static var light4: UIColor {
+            return UIColor(r: 200, g: 200, b: 200)
+        }
+        
+        static var light5: UIColor {
+            return UIColor(r: 180, g: 180, b: 180)
+        }
+        
+        static var light6: UIColor {
+            return UIColor(r: 150, g: 150, b: 150)
+        }
+        
+        static var light7: UIColor {
+            return UIColor(r: 130, g: 130, b: 130)
+        }
+        
+        static var light8: UIColor {
+            return UIColor(r: 110, g: 110, b: 110)
+        }
+        
+        static var light9: UIColor {
+            return UIColor(r: 90, g: 90, b: 90)
+        }
+        
+        static var light10: UIColor {
+            return UIColor(r: 70, g: 70, b: 70)
+        }
+
         
         static var blue: UIColor {
             return UIColor(r: 243, g: 248, b: 252)

@@ -12,7 +12,7 @@ import Alamofire
 struct AlamofireRequestModal {
     var method: Alamofire.HTTPMethod
     var path: String
-    var parameters: [String: AnyObject]?
+    var parameters: [String: Any]?
     var encoding: ParameterEncoding
     var headers: [String: String]?
     
@@ -21,19 +21,17 @@ struct AlamofireRequestModal {
         path = ""
         parameters = nil
         encoding = JSONEncoding() as ParameterEncoding
-        headers = ["Content-Type": "application/json",
-                   "X-Requested-With": "XMLHttpRequest",
-                   "Cache-Control": "no-cache"]
+        headers = [:]
     }
 }
 
 class BaseService: NSObject {
-    
-    func callWebServiceAlamofire(_ alamoReq: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void)) {
+        
+    internal func callWebServiceAlamofire(_ alamofireRequest: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: NSError?) -> Void)) {
         
         // Create alamofire request
-        // "alamoReq" is overridden in services, which will create a request here
-        let req = Alamofire.request(alamoReq.path, method: alamoReq.method, parameters: alamoReq.parameters, encoding: alamoReq.encoding, headers: alamoReq.headers)
+        // "alamofireRequest" is overridden in services, which will create a request here
+        let req = Alamofire.request(alamofireRequest.path, method: alamofireRequest.method, parameters: alamofireRequest.parameters, encoding: alamofireRequest.encoding, headers: alamofireRequest.headers)
         
         // Call response handler method of alamofire
         req.validate(statusCode: 200..<600).responseJSON(completionHandler: { response in
@@ -43,12 +41,12 @@ class BaseService: NSObject {
             case .success(let data):
                 
                 if statusCode == 200 {
-                    print( "\n Success: \(response)")
+                    //print( "\n Success: \(response)")
                     success(data as AnyObject?)
                     
                 } else if statusCode == 403 {
-                    // Access token expire
-                    self.requestForGetNewAccessToken(alaomReq: alamoReq, success: success, failure: failure as! ((Error?) -> Void))
+                    // Access token expired
+                    self.requestForGetNewAccessToken(alamofireRequest: alamofireRequest, success: success, failure: failure as! ((Error?) -> Void))
                     
                 } else {
                     let errorDict: [String: Any] = ((data as? NSDictionary)! as? [String: Any])!
@@ -65,16 +63,16 @@ class BaseService: NSObject {
 
 extension BaseService {
     
-    func getAccessToken() -> String {
-        if let accessToken =  UserDefaults.standard.value(forKey: "AccessToken") as? String {
-            return "Bearer " + accessToken
+    internal func getAccessToken() -> String {
+        if let accessToken =  KeychainWrapper.standard.string(forKey: Const.API.accessTokenKey) {
+            return Const.API.bearer + accessToken
         } else {
-            return ""
+            return Const.empty
         }
     }
     
     // MARK: - API CALL
-    func requestForGetNewAccessToken(alaomReq: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: Error?) -> Void) ) {
+    internal func requestForGetNewAccessToken(alamofireRequest: AlamofireRequestModal, success: @escaping ((_ responseObject: AnyObject?) -> Void), failure: @escaping ((_ error: Error?) -> Void) ) {
         
 //        UserModal().getAccessToken(success: { (responseObj) in
 //            if let accessToken = responseObj?.value(forKey: "accessToken") {

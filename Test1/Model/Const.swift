@@ -23,6 +23,7 @@ struct Const {
         static let plus = "plus1"
         static let addPhoto = "add_photo"
         static let tempImage = "temp_img"
+        static let delete = "delete"
     }
     
     struct PlaceHolder {
@@ -31,8 +32,10 @@ struct Const {
         static let advertisingTitle = "عنوان آگهی خود را بنویسید"
         static let advertisingDescription = "توضیحات آگهی خود را بنویسید"
         
-        static let userName = "نام کاربری"
+        static let userName = "نام کاربری (ایمیل)"
+        static let fullName = "نام و نام‌خانوادگی"
         static let password = "رمز عبور"
+        
     }
     
     struct Pages {
@@ -55,6 +58,7 @@ struct Const {
         
         struct ProfilePage {
             static let loginToAccount = "برای استفاده از تمامی امکانات دیوار، وارد حساب کاربری‌تان شوید."
+            static let welcomeUser = "شما وارد حساب کاربری خود شده‌اید."
             static let myAdvertisings = "آگهی‌های من"
             static let favAdvertisings = "نشان شده‌ها"
             static let aboutDivar = "درباره دیوار   ۱.۰.۰"
@@ -70,6 +74,11 @@ struct Const {
             static let fakePrice = "۷۲۰۰۰۰۰۰۰ تومان"
             static let fakeAdvertisingDescription = "سیبانه یک استاندارد جدید برای استفاده از پیشرفته ترین اسمارت فون جهان تعریف کرده است. این استاندارد جدید باعث شده است که کاربران ایرانی توانایی بیشتری برای استفاده از محصولات اپل داشته باشند. سیبانه اپ استور اپل را بصورت هوشمندانه و براساس نیازهای کاربران ایرانی بازطراحی کرده و در قالب اپ استور ایرانی نرم افزارهای اورجینال iOS در اختیار کاربران ایرانی قرار داده است."
             
+        }
+        
+        struct LoginAndRegister {
+            static let alreadyRegistered = "قبلا ثبت نام کرده‌ام!"
+            static let notRegister = "ثبت نام نکردی؟ ثبت نام کن!"
         }
     }
     
@@ -128,6 +137,39 @@ struct Const {
         static let chooseLocation = "انتخاب محل"
         static let callToSeller = "تماس با فروشنده"
         static let login = "ورود"
+        static let registerNewUser = "ثبت نام"
+        static let logout = "خروج"
+    }
+    
+    struct URL {
+        static let base = "http://127.0.0.1/Test1/index.php"
+        static let loginEndPoint = "http://127.0.0.1/Test1/logging.php"
+        static let registerEndPoint = "http://127.0.0.1/Test1/register.php"
+        static let allAdvertisingsEndPoint = "http://127.0.0.1/Test1/all-advertisings.php"
+        static let newAdvertisingEndPoint = "http://127.0.0.1/Test1/add-new-advertising.php"
+        static let fakeJSON = "https://jsonplaceholder.typicode.com/posts"
+    }
+    
+    struct API {
+        static let apiKey = ""
+        static let accessTokenKey = "access_token"
+        static let refreshTokenKey = "refresh_token"
+        static let bearer = "Bearer ://"
+        static let userId = "user_id"
+        static let fullName = "user_full_name"
+        
+        static let isSuccessful = "isSuccessful"
+        static let isLoggedIn = "isLoggedIn"
+    }
+    
+    struct Toast {
+        static let serverNotResponding = "سرور پاسخگو نیست. مجددا امتحان کنید!"
+        static let checkInternetConnection = "اتصال خود به اینترنت را چک کنید!"
+        static let chooseLocation = "استان محل زندگی خود را انتخاب کنید!"
+        static let imageListNotEnough = "حداقل یک عکس انتخاب کنید."
+        static let notLoggedIn = "شما وارد حساب کاربری خود نشده‌اید!"
+        static let fillInTheBlank = "فیلد‌های خالی را پر کنید!"
+        static let newAdvertisingRegisteredSuccessfully = "آگهی شما اب موفقیت ثبت شد."
     }
     
     struct TempText {
@@ -136,5 +178,42 @@ struct Const {
         static let loginUser = "بخش 'ورود کاربر' بزودی بروز رسانی می شود"
         static let phoneNumber = "09195474883"
         static let qazvin = "قزوین"
+    }
+    
+    struct Province {
+        static let provincesList = [
+            
+                        "کرمان",
+            "سیستان و بلوچستان",
+            "خراسان جنوبی",
+            "فارس",
+            "خراسان رضوی",
+            "اصفهان",
+            "سمنان",
+            "یزد",
+            "هرمزگان",
+            "خوزستان",
+            "آذربایجان شرقی",
+            "آذربایجان غربی",
+            "کردستان",
+            "مرکزی",
+            "خراسان شمالی",
+            "لرستان",
+            "بوشهر",
+            "کرمانشاه",
+            "مازندران",
+            "زنجان",
+            "گلستان",
+            "ایلام",
+            "همدان",
+            "اردبیل",
+            "چهارمحال و بختیاری",
+            "قزوین",
+            "کهگیلویه و بویراحمد",
+            "گیلان",
+            "تهران",
+            "قم",
+            "البرز"
+        ]
     }
 }

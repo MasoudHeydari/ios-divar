@@ -10,6 +10,16 @@ import UIKit
 
 class AdvertisingCell: BaseCell {
     
+    var advertisingModel: AdvertisingModel? {
+        didSet {
+            if let advertisingModel = self.advertisingModel {
+                self.titleLabel.text = advertisingModel.title
+                self.locationLabel.text = advertisingModel.location
+                self.priceLabel.text = "\(String(describing: advertisingModel.date)) , \(String(describing: advertisingModel.price))"
+            }   
+        }
+    }
+    
     let image: UIImageView = {
         let image = UIImageView()
         let img = UIImage(named: Const.Image.tempImage)
