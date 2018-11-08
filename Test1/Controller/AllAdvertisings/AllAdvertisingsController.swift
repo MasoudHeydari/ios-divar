@@ -50,19 +50,23 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
                 getAllAdvertisingFromServer()
             }
         } else {
-            view.addSubview(noInternetLabel)
-            noInternetLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-            noInternetLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-            noInternetLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 4).isActive = true
-            noInternetLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            
-            advertisingList.removeAll()
-            collectionView.reloadData()
+            setupNoInternetConnection()
         }
     }
     
     private func setupViews() {
         collectionView.backgroundColor = .white
+    }
+    
+    func setupNoInternetConnection() {
+        view.addSubview(noInternetLabel)
+        noInternetLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        noInternetLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        noInternetLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 4).isActive = true
+        noInternetLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        advertisingList.removeAll()
+        collectionView.reloadData()
     }
     
     private func setupCollectionView(){
@@ -85,6 +89,10 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
                     self?.advertisingList = advertisingList
                     self?.collectionView.reloadData()
                 }
+            } else {
+                // server not responding , added: 7 NOV 2018 -> 7:02 PM :: masoud heydari
+                self?.makeDefualtToast(string: Const.Toast.serverNotResponding)
+                self?.setupNoInternetConnection()
             }
         }
     }
@@ -111,7 +119,17 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
+    func makeDefualtToast(string: String) {
+        var style = ToastStyle()
+        ToastManager.shared.position = .bottom
+        style.verticalPadding = 10
+        style.bottomMargin = 100
+        ToastManager.shared.style = style
+        ToastManager.shared.duration = 1.0
+        self.view.makeToast(string, style: style)
+    }
+    
 }
 
 

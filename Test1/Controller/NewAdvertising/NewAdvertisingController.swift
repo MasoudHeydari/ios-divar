@@ -10,6 +10,8 @@ import UIKit
 
 class NewAdvertisingController: UIViewController {
     
+    var isEditingTextView = false
+    
     var allTextFields = [UIView]()
     var emptyTextFields = [UITextField]()
     var imagePickerController: UIImagePickerController?
@@ -245,6 +247,7 @@ class NewAdvertisingController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Const.Pages.NewADPage.advertisingDescription
         label.font = UIFont.systemFont(ofSize: 16)
+        label.backgroundColor = .white
         label.textAlignment = .right
         return label
     }()
@@ -318,6 +321,32 @@ class NewAdvertisingController: UIViewController {
         return btn
     }()
     
+    /* -------------------- ERROR LABELS    -------------------- */
+    
+    var phoneNumberErrorHeightConstraint = NSLayoutConstraint()
+    let phoneNumberLabelError: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textColor = UIColor.darkRedLight
+        label.backgroundColor = .white
+        label.textAlignment = .center
+        label.text = Const.Pages.NewADPage.ErrorLabel.phoneNumber
+        return label
+    }()
+    
+    var descriptionErrorConstraint = NSLayoutConstraint()
+    let descriptionLabelError: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
+        label.textColor = UIColor.darkRedLight
+        label.backgroundColor = .white
+        label.text = Const.Pages.NewADPage.ErrorLabel.description
+        return label
+    }()
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -389,138 +418,129 @@ class NewAdvertisingController: UIViewController {
     
     
     @objc func btnRegisterAdTapped(_ sender: UIButton) {
+        // close the keyboard, if is open.
+        didTapView()
+        
         let phoneNumber = self.phoneNumTextFiled.text
         let price = self.priceTextField.text
         let advertisingTitle = self.advertisingTitleTextField.text
         let advertisingDescription = self.advertisingDescriptionTextView.text
+
+        // ...
+        self.phoneNumberErrorHeightConstraint.constant = 0
+        self.descriptionErrorConstraint.constant = 0
+        self.view.layoutIfNeeded()
         
         if let phoneNumber = phoneNumber, let price = price, let advertisingTitle = advertisingTitle, let advertisingDescription = advertisingDescription {
             if phoneNumber.isEmpty || price.isEmpty || advertisingTitle.isEmpty || advertisingDescription == Const.PlaceHolder.advertisingDescription {
                 // one or more textfield is empty, say user to fill them
                 print("fill in the blank!")
+                validateTextFields(textFields: self.allTextFields)
+                self.makeDefualtToast(string: Const.Toast.fillInTheBlank)
                 
-                for textField in allTextFields {
-                    print(textField)
-                    if let tf = textField as? UITextView {
-                        print("one objetc found")
-                        if tf.text.isEmpty || tf.text == Const.PlaceHolder.advertisingDescription {
-                            tf.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
-                            tf.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
-                        }
-                        
-                    } else if let tf = textField as? UITextField {
-                        if tf.text!.isEmpty {
-                            tf.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
-                            tf.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
-                        }
-                    }
-                    
+                // vlidate phone number and descriprion textfileds
+                let boolsDic = self.validateInputOfTextFields(textFields: allTextFields)
+                
+                if !(boolsDic["tfPhoneNumber"]!) && !(phoneNumTextFiled.text?.isEmpty)! {
+                    self.phoneNumberErrorHeightConstraint.constant = 25
                 }
                 
-                var style = ToastStyle()
-                ToastManager.shared.position = .bottom
-                style.verticalPadding = 10
-                style.bottomMargin = 100
-                ToastManager.shared.style = style
-                ToastManager.shared.duration = 1.0
-                self.view.makeToast(Const.Toast.fillInTheBlank, style: style)
+                if !(boolsDic["tfDescription"]!) {
+                    self.descriptionErrorConstraint.constant = 25
+                }
+                self.view.layoutIfNeeded()
+                
+
                 
             } else if selectedLocation == Const.empty {
                 // choose a province
-                var style = ToastStyle()
-                ToastManager.shared.position = .bottom
-                style.verticalPadding = 10
-                style.bottomMargin = 100
-                ToastManager.shared.style = style
-                ToastManager.shared.duration = 1.0
-                self.view.makeToast(Const.Toast.chooseLocation, style: style)
+                self.makeDefualtToast(string: Const.Toast.chooseLocation)
             } else {
                 // all text field and other things are ready for registering new Advertising to server
                 print("all text field is full!")
-                // close the keyboard, if is open.
-                didTapView()
-                if Utils.checkInternetConnection() {
-                    if APIService.shared.isLoggedIn() {
-                        if imageList.count > 1 {
-                            // create new advertising model according to the user inputs in text fields
-                            let newAdvertising = NewAdvertisingModel(title: advertisingTitle, description: advertisingDescription, phoneNumber: phoneNumber, location: self.selectedLocation, price: price)
-                            
-                            // when cursor arrive here, there is no problem for uploading data to server, all conditions are OK, let's upload new advertising!
-                            
-                            // befor uploading, it is best practice to show a toas activity and when registeration finished, cancel it!
-                            
-                            ToastManager.shared.style.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-                            self.view.makeToastActivity(.center)
-                            APIService.shared.registerNewAdvertising(newAdvertising: newAdvertising) {[weak self](done, response) in
-                                if done {
-                                    if let response = response {
-                                        print("register new advertising response: \(response)")
-                                    }
-                                    // dimiss the active toast activity.
-                                    DispatchQueue.main.async {
-                                        self?.view.hideToastActivity()
-                                        // toast for say to user that new advertising successfully registered in server.
-                                        var style = ToastStyle()
-                                        ToastManager.shared.position = .bottom
-                                        style.verticalPadding = 10
-                                        style.bottomMargin = 100
-                                        ToastManager.shared.style = style
-                                        ToastManager.shared.duration = 1.0
-                                        self?.view.makeToast(Const.Toast.newAdvertisingRegisteredSuccessfully, style: style)
-                                        
-                                        // remove all images from imageList and reload collection view
-                                        self?.imageList.removeAll()
-                                        self?.reloadImageCollectionView()
-                                        
-                                        // erase text field's inputs
-                                        self?.clearTextOfTextFields()
-                                        
-                                        // set title of choose location button to default
-                                        self?.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
-                                        
-                                    }
-                                } else {
-                                    // tell user that there is some problem on registering new advertising to server, maybe server not responding or ther problems ...
-                                    // added 7 NOV 2018 -> 01:13 PM
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                                        // delay for 0.2 second
-                                        self?.view.hideAllToasts()
-                                        var style = ToastStyle()
-                                        ToastManager.shared.position = .bottom
-                                        style.verticalPadding = 10
-                                        style.bottomMargin = 100
-                                        ToastManager.shared.style = style
-                                        ToastManager.shared.duration = 1.0
-                                        self?.view.makeToast(Const.Toast.serverNotResponding, style: style)
-                                        self?.view.hideToastActivity()
+                
+                self.phoneNumberErrorHeightConstraint.constant = 0
+                self.descriptionErrorConstraint.constant = 0
+                self.view.layoutIfNeeded()
+                // validate the textfields , length of inputs and stuff like that ...
+                let boolsDic = self.validateInputOfTextFields(textFields: allTextFields)
+                print("dict is: \(boolsDic)")
+                if boolsDic["tfPhoneNumber"]! &&  boolsDic["tfDescription"]! {
+                    
+                    // all text field is valid and there is no problem for registration of new advertising
+                    if Utils.checkInternetConnection() {
+                        if APIService.shared.isLoggedIn() {
+                            if imageList.count > 1 {
+                                // create new advertising model according to the user inputs in text fields
+                                let newAdvertising = NewAdvertisingModel(title: advertisingTitle, description: advertisingDescription, phoneNumber: phoneNumber, location: self.selectedLocation, price: price)
+                                
+                                // when cursor arrive here, there is no problem for uploading data to server, all conditions are OK, let's upload new advertising!
+                                
+                                // befor uploading, it is best practice to show a toas activity and when registeration finished, cancel it!
+                                
+                                ToastManager.shared.style.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+                                self.view.makeToastActivity(.center)
+                                APIService.shared.registerNewAdvertising(newAdvertising: newAdvertising) {[weak self](done, response) in
+                                    if done {
+                                        if let response = response {
+                                            print("register new advertising response: \(response)")
+                                        }
+                                        // dimiss the active toast activity.
+                                        DispatchQueue.main.async {
+                                            self?.view.hideToastActivity()
+                                            // toast for say to user that new advertising successfully registered in server.
+                                            
+                                            self?.makeDefualtToast(string: Const.Toast.newAdvertisingRegisteredSuccessfully)
+                                            
+                                            // remove all images from imageList and reload collection view
+                                            self?.imageList.removeAll()
+                                            self?.reloadImageCollectionView()
+                                            
+                                            // erase text field's inputs
+                                            self?.clearTextOfTextFields()
+                                            
+                                            // set title of choose location button to default
+                                            self?.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
+                                            
+                                        }
+                                    } else {
+                                        // tell user that there is some problem on registering new advertising to server, maybe server not responding or ther problems ...
+                                        // added 7 NOV 2018 -> 01:13 PM
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                                            // delay for 0.2 second
+                                            self?.view.hideAllToasts()
+                                            self?.makeDefualtToast(string: Const.Toast.serverNotResponding)
+                                            self?.view.hideToastActivity()
+                                        }
                                     }
                                 }
+                            } else {
+                                // image list is not enough for uploading them to server.
+                                print("image list in not enough")
+                                self.makeDefualtToast(string: Const.Toast.imageListNotEnough )
                             }
                         } else {
-                            // image list is not enough for uploading them to server.
-                            print("image list in not enough")
-                            var style = ToastStyle()
-                            ToastManager.shared.position = .bottom
-                            style.verticalPadding = 10
-                            style.bottomMargin = 100
-                            ToastManager.shared.style = style
-                            ToastManager.shared.duration = 1.0
-                            self.view.makeToast(Const.Toast.imageListNotEnough, style: style)
+                            // user not logged in
+                            self.makeDefualtToast(string: Const.Toast.notLoggedIn )
                         }
-                    } else {
-                        // user not logged in
-                        var style = ToastStyle()
-                        ToastManager.shared.position = .bottom
-                        style.verticalPadding = 10
-                        style.bottomMargin = 100
-                        ToastManager.shared.style = style
-                        ToastManager.shared.duration = 1.0
-                        self.view.makeToast(Const.Toast.notLoggedIn, style: style)
+                    }
+                    else {
+                        // there is no internet connection
+                        // added: 2018/10/29 : 9:14 AM
+                        self.view.makeToast(Const.Toast.checkInternetConnection)
                     }
                 } else {
-                    // there is no internet connection
-                    // added: 2018/10/29 : 9:14 AM
-                    self.view.makeToast(Const.Toast.checkInternetConnection)
+                    // when curser achive here, one or more textfield is not valid, so tell user to edit them.  << 8 NOV 2018 -> 12:28 PM    added by : Masoud Heydari >>
+                    
+                    if !(boolsDic["tfPhoneNumber"]!) {
+                        self.phoneNumberErrorHeightConstraint.constant = 25
+                    }
+                    
+                    if !(boolsDic["tfDescription"]!) {
+                        self.descriptionErrorConstraint.constant = 25
+                    }
+                    self.view.layoutIfNeeded()
+                    
                 }
             }
         }
@@ -544,6 +564,58 @@ extension NewAdvertisingController {
         navigationItem.title = Const.NavTitle.newAdvertising
     }
     
+    func validateTextFields(textFields: [UIView]) {
+        for textField in textFields {
+            print(textField)
+            if let tf = textField as? UITextView {
+                print("one objetc found")
+                if tf.text.isEmpty || tf.text == Const.PlaceHolder.advertisingDescription {
+                    tf.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    tf.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+                
+            } else if let tf = textField as? UITextField {
+                if tf.text!.isEmpty {
+                    tf.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    tf.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+            }
+            
+        }
+    }
+    
+    func validateInputOfTextFields(textFields: [UIView]) -> [String : Bool] {
+        var boolsDic = [
+            "tfPhoneNumber" : true,
+            "tfDescription" : true
+        ]
+        
+        for textField in textFields {
+            switch textField {
+            case phoneNumTextFiled:
+                let text = phoneNumTextFiled.text
+                if(text!.range(of: "09", options: NSString.CompareOptions.caseInsensitive) == nil){
+                    boolsDic["tfPhoneNumber"] = false
+                    phoneNumTextFiled.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    phoneNumTextFiled.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+                
+            case advertisingDescriptionTextView:
+                let text = advertisingDescriptionTextView.text
+                
+                if (text?.count)! < 9 {
+                    boolsDic["tfDescription"] = false
+                    advertisingDescriptionTextView.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    advertisingDescriptionTextView.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+            default: break
+                
+            }
+        }
+        
+        return boolsDic
+    }
+    
     func addViews(){
         view.addSubview(scrollView)
         
@@ -563,10 +635,11 @@ extension NewAdvertisingController {
         mainContainer.addSubview(advertisingTitleTextField)
         mainContainer.addSubview(divider3)
         mainContainer.addSubview(advertisingDescriptionLabel)
-        //        mainContainer.addSubview(advertisingDescriptionTextField)
         mainContainer.addSubview(advertisingDescriptionTextView)
         mainContainer.addSubview(btnRegisterAdvertising)
         mainContainer.addSubview(advertisingDescriptionText)
+        mainContainer.addSubview(phoneNumberLabelError)
+        mainContainer.addSubview(descriptionLabelError)
         
         self.allTextFields.append(phoneNumTextFiled)
         self.allTextFields.append(priceTextField)
@@ -623,8 +696,14 @@ extension NewAdvertisingController {
         advertisingPhoneNumLabel.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
         advertisingPhoneNumLabel.heightAnchor.constraint(equalToConstant: 48).isActive = true
         
+        phoneNumberLabelError.leftAnchor.constraint(equalTo: self.divider2.leftAnchor).isActive = true
+        phoneNumberLabelError.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
+        phoneNumberLabelError.topAnchor.constraint(equalTo: self.advertisingPhoneNumLabel.bottomAnchor).isActive = true
+        self.phoneNumberErrorHeightConstraint = phoneNumberLabelError.heightAnchor.constraint(equalToConstant: 0)
+        self.phoneNumberErrorHeightConstraint.isActive = true
+
         phoneNumTextFiled.leftAnchor.constraint(equalTo: self.mainContainer.leftAnchor, constant: 12).isActive = true
-        phoneNumTextFiled.topAnchor.constraint(equalTo: self.advertisingPhoneNumLabel.bottomAnchor).isActive = true
+        phoneNumTextFiled.topAnchor.constraint(equalTo: self.phoneNumberLabelError.bottomAnchor).isActive = true
         phoneNumTextFiled.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
         phoneNumTextFiled.heightAnchor.constraint(equalToConstant: 45).isActive = true
         phoneNumTextFiled.delegate = self
@@ -661,9 +740,15 @@ extension NewAdvertisingController {
         advertisingDescriptionLabel.topAnchor.constraint(equalTo: self.advertisingTitleTextField.bottomAnchor, constant: 8).isActive = true
         advertisingDescriptionLabel.heightAnchor.constraint(equalTo: self.pricaLabel.heightAnchor).isActive = true
         
+        descriptionLabelError.leftAnchor.constraint(equalTo: self.divider2.leftAnchor).isActive = true
+        descriptionLabelError.rightAnchor.constraint(equalTo: self.divider2.rightAnchor).isActive = true
+        descriptionLabelError.topAnchor.constraint(equalTo: self.advertisingDescriptionLabel.bottomAnchor).isActive = true
+        self.descriptionErrorConstraint = descriptionLabelError.heightAnchor.constraint(equalToConstant: 0)
+        self.descriptionErrorConstraint.isActive = true
+        
         advertisingDescriptionTextView.leftAnchor.constraint(equalTo: self.priceTextField.leftAnchor).isActive = true
         advertisingDescriptionTextView.rightAnchor.constraint(equalTo: self.priceTextField.rightAnchor).isActive = true
-        advertisingDescriptionTextView.topAnchor.constraint(equalTo: self.advertisingDescriptionLabel.bottomAnchor).isActive = true
+        advertisingDescriptionTextView.topAnchor.constraint(equalTo: self.descriptionLabelError.bottomAnchor).isActive = true
         advertisingDescriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 90).isActive = true
         advertisingDescriptionTextView.delegate = self
         
@@ -678,6 +763,16 @@ extension NewAdvertisingController {
         btnRegisterAdvertising.heightAnchor.constraint(equalTo: self.pricaLabel.heightAnchor).isActive = true
         
         btnRegisterAdvertising.bottomAnchor.constraint(equalTo: self.mainContainer.bottomAnchor).isActive = true
+    }
+    
+    func makeDefualtToast(string: String) {
+        var style = ToastStyle()
+        ToastManager.shared.position = .bottom
+        style.verticalPadding = 10
+        style.bottomMargin = 100
+        ToastManager.shared.style = style
+        ToastManager.shared.duration = 1.0
+        self.view.makeToast(string, style: style)
     }
     
     func addObserverToViewGustureRecognizer(){
@@ -826,7 +921,7 @@ extension NewAdvertisingController: UITextFieldDelegate {
         self.priceTextField.text = Const.empty
         self.advertisingTitleTextField.text = Const.empty
         self.advertisingDescriptionTextView.text = Const.PlaceHolder.advertisingDescription
-        self.advertisingDescriptionTextView.textColor = UIColor.Gray.light4
+        self.advertisingDescriptionTextView.textColor = UIColor.Gray.light5
         
         // right aligment of text fields
         self.phoneNumTextFiled.textAlignment = .right
@@ -927,7 +1022,6 @@ extension NewAdvertisingController: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.layer.borderColor = UIColor.darkRedLight.cgColor
-        
         if textView.textColor == UIColor.Gray.light5 {
             textView.textColor = .black
             textView.text = nil
@@ -936,7 +1030,6 @@ extension NewAdvertisingController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         textView.layer.borderColor = UIColor.Gray.light4.cgColor
-        
         if textView.text.isEmpty {
             textView.textColor = UIColor.Gray.light5
             //            textView.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor

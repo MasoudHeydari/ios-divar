@@ -49,6 +49,11 @@ struct Const {
             static let price = "قیمت"
             static let advertisingImageDescription =  "\n" + "افزودن عکس، بازدید آگهی شما را تا ۳ برابر افزیش می‌دهد" + "\n" + "حداکثر ۵ عکس انتخاب کنید."
             static let newAdvertisingDescription = "تمام جزییات و نکات قابل توجه آگهی خود را یه صورت کامل در اینجا ذکر کنید. توجه با این مورد به طور قابل توجهی ابهامات کاربران را برطرف خواهد کرد و شانس موفقیت آگهی شما را افزایش می‌دهد."
+            
+            struct ErrorLabel {
+                static let phoneNumber = "شماره تلفن نامعتبر است!"
+                static let description = "طول متن باید بیشتر از ۱۰ حرف باشد!"
+            }
         }
         
         struct AllADPage {
@@ -163,7 +168,7 @@ struct Const {
     }
     
     struct Toast {
-        static let serverNotResponding = "سرور پاسخگو نیست. مجددا امتحان کنید!"
+        static let serverNotResponding = "سرور پاسخ گو نیست. مجددا امتحان کنید!"
         static let checkInternetConnection = "اتصال خود به اینترنت را چک کنید!"
         static let chooseLocation = "استان محل زندگی خود را انتخاب کنید!"
         static let imageListNotEnough = "حداقل یک عکس انتخاب کنید."
