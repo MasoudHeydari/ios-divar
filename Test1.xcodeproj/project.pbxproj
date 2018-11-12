@@ -44,6 +44,7 @@
 		95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C12187274D005E83FE /* KeychainWrapper.swift */; };
 		95FF44C521874908005E83FE /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C421874908005E83FE /* BaseService.swift */; };
 		95FF44C721874977005E83FE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C621874977005E83FE /* APIService.swift */; };
+		95FFD0DF21994BEF00C26C3B /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFD0DE21994BEF00C26C3B /* temp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		95FF44C12187274D005E83FE /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		95FF44C421874908005E83FE /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		95FF44C621874977005E83FE /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		95FFD0DE21994BEF00C26C3B /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		DF4EDA1242B80893DFA07382 /* Pods_Test1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Test1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3F9D7D341AC4FD2AE32B11D /* Pods-Test1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Test1.release.xcconfig"; path = "Pods/Target Support Files/Pods-Test1/Pods-Test1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +273,7 @@
 				95E8EE4A217E01B300735627 /* MyFavAdvertisingViewController.swift */,
 				95E8EE4C217E01CF00735627 /* AboutDivarViewController.swift */,
 				95E8EE4E217E01E100735627 /* AboutUsViewController.swift */,
+				95FFD0DE21994BEF00C26C3B /* temp.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */,
 				95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */,
 				9506DFFE2170B03B002A6FFC /* AppDelegate.swift in Sources */,
+				95FFD0DF21994BEF00C26C3B /* temp.swift in Sources */,
 				95DB3D6C21901A23009D2E9D /* UIView+Toast.swift in Sources */,
 				95D8D8B5218CF584002EF37F /* PopupChooseLocationTableViewCell.swift in Sources */,
 				955E63AD2192EC8C00B44115 /* UITextView+Helper.swift in Sources */,

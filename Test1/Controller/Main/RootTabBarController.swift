@@ -49,7 +49,9 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
         ]
         
         setupMiddleButton()
-        selectedIndex = 1
+        // when app open, first screen that show up, is AllAdvertisingController
+        // added by : Masoud Heydari    10 NOV 2018   09:15  AM
+        selectedIndex = 2
     }
     
     func setupMiddleButton() {

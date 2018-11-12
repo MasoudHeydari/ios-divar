@@ -17,7 +17,9 @@ class AdvertisingModel {
     var location: String
     
     init(json: JSON) {
-        self.advertising_id = json["advertising_id"].uInt ?? 0
+        // MARK:- delete casting to UInt, if needed.
+        // added by : Masoud Heydari     10 NOV 2018     9:10   AM
+        self.advertising_id = UInt(json["advertising_id"].string ?? "0") ?? 0
         self.title = json["title"].string ?? Const.empty
         self.date = json["date"].string ?? Const.empty
         self.location = json["location"].string ?? Const.empty
@@ -28,7 +30,7 @@ class AdvertisingModel {
 
 class DetailAdvertisingModel {
     var advertising_id: NSNumber?
-    var imgURL: String?
+    var imgURL: [String]?
     var isFavorite: Bool?
     var phoneNumber: String?
     var title: String?

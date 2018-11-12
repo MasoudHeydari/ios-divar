@@ -12,6 +12,11 @@ import SwiftyJSON
 
 class LoginAndRegisterViewController: UIViewController {
     
+    let tfFullName = "full_name"
+    let tfUserName = "user_name"
+    let tfPassword = "password"
+    
+    var allTextFields = [UITextField]()
     var isLogginMode = true
     private let viewTapGestureRecognizer = UITapGestureRecognizer()
     
@@ -65,11 +70,12 @@ class LoginAndRegisterViewController: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = Const.PlaceHolder.password
+        textField.backgroundColor = UIColor.Gray.light1
+        textField.isSecureTextEntry = true
         textField.textAlignment = .right
         textField.layer.borderColor = UIColor.Gray.light2.cgColor
         textField.layer.borderWidth = 2
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.backgroundColor = UIColor.Gray.light1
         textField.clipsToBounds = true
         textField.keyboardType = .default
         
@@ -136,6 +142,7 @@ class LoginAndRegisterViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(btnLoginTapped)
         view.addSubview(loginOrRegisterLabel)
+        
     }
     
     private func clearMainView(){
@@ -145,9 +152,10 @@ class LoginAndRegisterViewController: UIViewController {
     }
     
     private func addSubViewsConstraints(){
+        clearTextOfTextFields()
+        
         if isLogginMode {
             clearMainView()
-            clearTextFields()
             
             view.addSubview(userNameTextField)
             view.addSubview(passwordTextField)
@@ -182,7 +190,6 @@ class LoginAndRegisterViewController: UIViewController {
             
         } else {
             clearMainView()
-            clearTextFields()
             
             view.addSubview(userNameTextField)
             view.addSubview(passwordTextField)
@@ -241,66 +248,104 @@ class LoginAndRegisterViewController: UIViewController {
         let password = passwordTextField.text
         let fullName = fullNameTextField.text
         
-        if let userName = userName, let password = password {
-            if !userName.isEmpty && !password.isEmpty {
-                print("all text field in full!")
-                let api = APIService()
-                if isLogginMode {
-                    api.loginUser(userName: userName, password: password) { [weak self] (response) in
-                        if let json = response as? JSON {
-                            var style = ToastStyle()
-                            style.verticalPadding = 10
-                            style.bottomMargin = 30
-                            ToastManager.shared.style = style
-                            ToastManager.shared.duration = 1.0
-                            self?.view.makeToast(json["response"].string) { (didTap) in
-                                if json[Const.API.isSuccessful].bool ?? false {
-                                    self?.navigationController?.popViewController(animated: true)
-                            }
-                            }
-                        }
-                    }
-                    clearTextFields()
-                } else {
-                    if let fullName = fullName {
-                        if !fullName.isEmpty {
-                            api.registerNewUser(fullName: fullName, userName: userName, password: password){ [weak self] (response) in
+        // first of all, set backgroundcolor and border color of all text fields to default. added by: Masoud Heydari 12 NOV 2018   10:01 AM
+        userNameTextField.layer.borderColor = UIColor.Gray.light2.cgColor
+        userNameTextField.backgroundColor = UIColor.Gray.light1
+        
+        passwordTextField.layer.borderColor = UIColor.Gray.light2.cgColor
+        passwordTextField.backgroundColor = UIColor.Gray.light1
+        
+        fullNameTextField.layer.borderColor = UIColor.Gray.light2.cgColor
+        fullNameTextField.backgroundColor = UIColor.Gray.light1
+        
+        if isLogginMode {
+            // user is in loggin mode, so we have only two textfileds: userName and password textfields. added by: Masoud Heydari. 12 NOV 2018   09:20  AM
+            
+            if let userName = userName, let password = password {
+                // inputs of two text fields unwrapped. added by: Masoud Heydari  12 NOV 2018  09:23  AM
+                if !userName.isEmpty && !password.isEmpty {
+                    // all text fields (in loggin mode) is full but not validate yet. added by: Masoud Heydari  12 NOV 2018  09:31  AM
+                    // validate user inputs. added by: Masoud Heydari  12  NOV 2018  10:11 AM
+                    let boolsDic = validateInputOfTextFields(textFields: [self.userNameTextField, self.passwordTextField])
+                    
+                    if boolsDic[self.tfPassword]! && boolsDic[self.tfUserName]! {
+                        // ( in loggin mode ) all two text fields are valid inputs. let's dive in loggin proccess. added by: Masoud Heydari   12 NOV 2018   10:15  AM
+                        
+                        // check internet connection
+                        if Utils.checkInternetConnection() {
+                            // all things is ready for loggin proccess. added by:  Masoud Heydari  12 NOV 2018   11:24  AM
+                            APIService.shared.loginUser(userName: userName, password: password) { [weak self] (response) in
                                 if let json = response as? JSON {
-                                    self?.clearTextFields()
-                                    var style = ToastStyle()
-                                    style.verticalPadding = 10
-                                    style.bottomMargin = 30
-                                    ToastManager.shared.style = style
-                                    ToastManager.shared.duration = 1.0
-                                    self?.view.makeToast(json["response"].string) { (didTap) in
+                                    self?.makeDefualtToast(string: json["response"].string!, completion: { (didTap) in
                                         if json[Const.API.isSuccessful].bool ?? false {
+                                            // if user successfully logged in, pop the view and back to profile controller. added by: Masoud Heydari  12 NOV 2018   10:54  AM
                                             self?.navigationController?.popViewController(animated: true)
-                                    }
-                                        
-                                    }
+                                            self?.clearTextOfTextFields()
+                                            
+                                        }
+                                    })
                                 }
                             }
+                            
+                        } else {
+                            // all things is ready for loggin proccess, but there is no internet connection.   added by: Masoud Heydari   12 NOV 2018   11:22  AM
+                            self.makeDefualtToast(string: Const.Toast.checkInternetConnection)
                         }
+                    } else {
+                        // ( in loggin mode ) all text fields have value but not validate yet, show a toast and tell it to user. added by: Masoud Heydari  12 NOV 2018   10:20  AM
+                        self.makeDefualtToast(string: Const.Toast.shortCharacter)
                     }
+                } else {
+                    // ( in login mode ) one or more text fields are empty. make a toast an tell to user to fill in the blanck. adde by : Masoud Heydari   12 NOV 2018  10:24 AM
+                    self.makeDefualtToast(string: Const.Toast.fillInTheBlank)
+                    // change the background color and border color of empty text fields. added by: Masoud heydari  12 NOV 2018   10:51  AM
+                    self.validateTextFields(textFields: [self.userNameTextField, self.passwordTextField])
                 }
-                
-            }else {
-                print("oooops! some text field is nil! fill in the blanck.")
-                var style = ToastStyle()
-                
-                style.verticalPadding = 10
-                style.bottomMargin = 30
-                ToastManager.shared.style = style
-                ToastManager.shared.duration = 1.5
-                self.view.makeToast(Const.Toast.fillInTheBlank)
             }
         }
-    }
-    
-    private func clearTextFields(){
-        self.fullNameTextField.text = ""
-        self.passwordTextField.text = ""
-        self.userNameTextField.text = ""
+        else {
+            // user is in register mode, so we have three textfields: fulname, userName and password. added by: Masoud Heydari 12 NPV 2018  09:28 AM
+            if let userName = userName, let password = password, let fullName = fullName {
+                // inputs of three text fields unwrapped. added by: Masoud Heydari  12 NOV 2018  09:36 AM
+                if !userName.isEmpty && !fullName.isEmpty && !password.isEmpty {
+                    // all three text fields are blanck, tell user to fill theme but not validate yet. added by: Masoud Heyadri  12 NOV 2018  09:39 AM
+                    
+                    // validate inputs of text fields. added by: Masoud Heydari  12 NOV 2018 09:56 AM
+                    let boolsDic = validateInputOfTextFields(textFields: [self.fullNameTextField, self.userNameTextField, self.passwordTextField])
+                    
+                    if boolsDic[self.tfFullName]! && boolsDic[self.tfUserName]! && boolsDic[self.tfPassword]! {
+                        // ( in register mode ) all text fields are fill and also have valid input but you must check internet connection befor register proccess , added by: Masoud Heydari  12 NOV 2018  09:58 AM
+                        
+                        // check internet connection
+                        if Utils.checkInternetConnection() {
+                            // all things is ready for registeration proccess. added by:  Masoud Heydari  12 NOV 2018   11:24  AM
+                            APIService.shared.registerNewUser(fullName: fullName, userName: userName, password: password){ [weak self] (response) in
+                                if let json = response as? JSON {
+                                    
+                                    self?.makeDefualtToast(string: json["response"].string!, completion: { (didTap) in
+                                        if json[Const.API.isSuccessful].bool ?? false {
+                                            self?.navigationController?.popViewController(animated: true)
+                                            self?.clearTextOfTextFields()
+                                        }
+                                    })
+                                }
+                            }
+                            
+                        } else {
+                            // all things is ready for registeration proccess, but there is no internet connection.   added by: Masoud Heydari   12 NOV 2018   11:28  AM
+                            self.makeDefualtToast(string: Const.Toast.checkInternetConnection)
+                        }
+                    }
+                    else {
+                        // one of text fields is not valid input, added by: Masoud Heydari 12 NOV 2018  09:58  AM
+                        self.makeDefualtToast(string: Const.Toast.shortCharacter)
+                    }
+                } else {
+                    // ( in register mode ) some of text fields is blanck, tell user to fill them. added by: Masoud Heydari. 12 NOV 2018   10:08  AM
+                    self.makeDefualtToast(string: Const.Toast.fillInTheBlank)
+                }
+            }
+        }
     }
     
     @objc private func loginLabelTapped(_ sender: UILabel) {
@@ -314,6 +359,22 @@ class LoginAndRegisterViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    func makeDefualtToast(string: String, duration: TimeInterval = 1.0, completion: ((_ didTap: Bool) -> Void)? = nil) {
+        var style = ToastStyle()
+        ToastManager.shared.position = .bottom
+        style.verticalPadding = 10
+        style.bottomMargin = 50
+        ToastManager.shared.style = style
+        ToastManager.shared.duration = duration
+        if completion == nil {
+            self.view.makeToast(string, style: style)
+        } else {
+            self.view.makeToast(string, style: style) { (didTap) in
+                completion!(didTap)
+            }
+        }
+    }
+    
     
 }
 
@@ -325,7 +386,7 @@ class LoginAndRegisterViewController: UIViewController {
 
 extension LoginAndRegisterViewController: UITextFieldDelegate {
     
-    private func addObservers(){
+    private func addObservers() {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardShowing(_:)), name: UIWindow.keyboardDidShowNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardHiding(_:)), name: UIWindow.keyboardDidHideNotification, object: nil)
@@ -347,5 +408,80 @@ extension LoginAndRegisterViewController: UITextFieldDelegate {
     @objc private func keyboardHiding(_ notification: NotificationCenter) {
         self.view.removeGestureRecognizer(viewTapGestureRecognizer)
         
+    }
+    
+    func validateTextFields(textFields: [UITextField]) {
+        for textField in textFields {
+            if let text = textField.text {
+                if text.isEmpty {
+                    textField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    textField.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+            }
+        }
+    }
+    
+    func validateInputOfTextFields(textFields: [UITextField]) -> [String : Bool] {
+        var boolsDic = [
+            self.tfUserName : true,
+            self.tfPassword : true,
+            self.tfFullName : true
+        ]
+        
+        for textField in textFields {
+            switch textField {
+            case userNameTextField:
+                let text = userNameTextField.text
+                if text?.count ?? 0 < 5 {
+                    boolsDic[self.tfUserName] = false
+                    userNameTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    userNameTextField.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+                
+            case passwordTextField:
+                let text = passwordTextField.text
+                
+                if (text?.count)! < 5 {
+                    boolsDic[self.tfPassword] = false
+                    passwordTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    passwordTextField.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+                
+            case fullNameTextField:
+                let text = fullNameTextField.text
+                
+                if (text?.count)! < 5 {
+                    boolsDic[self.tfFullName] = false
+                    fullNameTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+                    fullNameTextField.backgroundColor =  UIColor.darkRedLight.withAlphaComponent(0.2)
+                }
+            default: break
+                
+            }
+        }
+        
+        return boolsDic
+    }
+    
+    private func resetTextFields(){
+        // change back color of border color an background color of textfields, added by: Masoud Heydari  12 NOV 2018 AM
+        
+        //        self.userNameTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+        self.userNameTextField.backgroundColor = UIColor.darkRedLight.withAlphaComponent(0.2)
+        
+        self.passwordTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+        self.passwordTextField.backgroundColor = UIColor.darkRedLight.withAlphaComponent(0.2)
+        
+        self.fullNameTextField.layer.borderColor = UIColor.darkRedLight.withAlphaComponent(0.5).cgColor
+        self.fullNameTextField.backgroundColor = UIColor.darkRedLight.withAlphaComponent(0.2)
+        
+        clearTextOfTextFields()
+    }
+    
+    private func clearTextOfTextFields() {
+        // clear input text of text field, added by: Masoud Heydari  12 NOV 2018 AM  11:47  AM
+        self.fullNameTextField.text = ""
+        self.passwordTextField.text = ""
+        self.userNameTextField.text = ""
     }
 }

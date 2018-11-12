@@ -122,5 +122,31 @@ extension UIColor {
             return UIColor(red: 231/255, green: 234/255, blue: 236/255, alpha: 1)
         }
     }
+    
+    struct Yellow {
+        static var light0: UIColor {
+            return UIColor(r: 255, g: 255, b: 204)
+        }
+        
+        static var light1: UIColor {
+            return UIColor(r: 255, g: 255, b: 153)
+        }
+        
+        static var light2: UIColor {
+            return UIColor(r: 255, g: 255, b: 102)
+        }
+        
+        static var light3: UIColor {
+            return UIColor(r: 255, g: 255, b: 51)
+        }
+        
+        static var dark0: UIColor {
+            return UIColor(r: 241, g: 220, b: 73)
+        }
+        
+        static var dark1: UIColor {
+            return UIColor(r: 221, g: 198, b: 66)
+        }
+    }
 }
 

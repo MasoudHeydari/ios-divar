@@ -25,6 +25,11 @@ class APIService: BaseService {
     /// The shared instance to define the singleton.
     static let shared = APIService()
     
+    // no one can create any instance of this object.
+    // added by Masoud Heydari.   10 NOV 2018   09:57 AM
+    private override init() {
+    }
+    
     func getUserProfile(success: @escaping ((_ responseObject: Any?) -> Void), failure: @escaping ((_ error: Error?) -> Void)) {
         var request: AlamofireRequestModal = AlamofireRequestModal()
         request.method = .get
@@ -116,16 +121,15 @@ class APIService: BaseService {
         return KeychainWrapper.standard.bool(forKey: Const.API.isLoggedIn) ?? false
     }
     
-    public func getAllAdvertisingsFromServer(completion: @escaping (_ done: Bool, _ advertisingList: [AdvertisingModel]?) -> Void){
+    public func getAllAdvertisingsFromServer(completion: @escaping (_ done: Bool, _ advertisingList: [AdvertisingModel]?) -> Void) {
         var advertisingsList = [AdvertisingModel]()
         var request: AlamofireRequestModal = AlamofireRequestModal()
         request.method = .get
         request.encoding = URLEncoding.default
         request.headers = nil
         request.path = Const.URL.allAdvertisingsEndPoint
-        
         request.parameters = [ : ]
-        print(1)
+        
         self.callWebServiceAlamofire(request, success: { (response) in
             // optional unwrapping 'response'
             if let response = response {
@@ -182,4 +186,91 @@ class APIService: BaseService {
             print(error?.localizedDescription ?? "there is an error while registering new advertising")
         }
     }
+    
+    public func getDetailsOfAdvertisingByUserId(advertisingId: UInt, userId: UInt, completion: @escaping (_ done: Bool, _ detailsOfAdvertising: DetailAdvertisingModel?) -> Void){
+        
+        var request = AlamofireRequestModal()
+        request.method = .post
+        request.path = Const.URL.singleAdvertisingByUserId
+        request.encoding = URLEncoding.httpBody
+        request.headers = nil
+        request.parameters = [
+            Const.API.advertisingId : advertisingId,
+            Const.API.userId : userId
+        ]
+        
+        self.callWebServiceAlamofire(request, success: { (serverResponse) in
+            if let serverResponse = serverResponse {
+                let jsonResponse = JSON(serverResponse)
+                let detailsOfAdvertising = DetailAdvertisingModel()
+                
+                detailsOfAdvertising.title = jsonResponse["title"].string
+                detailsOfAdvertising.description = jsonResponse["description"].string
+                detailsOfAdvertising.price = jsonResponse["price"].string
+                detailsOfAdvertising.phoneNumber = jsonResponse["phoneNumber"].string
+                detailsOfAdvertising.date = jsonResponse["date"].string
+                detailsOfAdvertising.location = jsonResponse["location"].string
+                detailsOfAdvertising.isFavorite = jsonResponse["isLiked"].bool
+                
+                completion(true, detailsOfAdvertising)
+            }
+        }) { (error) in
+            completion(false, nil)
+        }
+        
+    }
+    
+    public func getDetailsOfAdvertising(advertisingId: UInt, completion: @escaping (_ done: Bool, _ detailsOfAdvertising: DetailAdvertisingModel?) -> Void) {
+        var request = AlamofireRequestModal()
+        request.path = Const.URL.sigleAdvertising
+        request.encoding = URLEncoding.httpBody
+        request.method = .post
+        request.headers = nil
+        request.parameters = [
+            Const.API.advertisingId : advertisingId
+        ]
+        
+        self.callWebServiceAlamofire(request, success: { (serverResponse) in
+            if let serverResponse = serverResponse {
+                let jsonResponse = JSON(serverResponse)
+                let detailsOfAdvertising = DetailAdvertisingModel()
+                
+                detailsOfAdvertising.title = jsonResponse["title"].string
+                detailsOfAdvertising.description = jsonResponse["description"].string
+                detailsOfAdvertising.price = jsonResponse["price"].string
+                detailsOfAdvertising.phoneNumber = jsonResponse["phoneNumber"].string
+                detailsOfAdvertising.date = jsonResponse["date"].string
+                detailsOfAdvertising.location = jsonResponse["location"].string
+                
+                completion(true, detailsOfAdvertising)
+            }
+        }) { (error) in
+            completion(false, nil)
+        }
+    }
+    
+    
+    public func likeAdvertising(advertisingId: UInt, userId: UInt, completion: @escaping (_ done: Bool, _ response: String?) -> Void) {
+        
+        var request = AlamofireRequestModal()
+        request.method = .post
+        request.headers = nil
+        request.encoding = URLEncoding.httpBody
+        request.path = Const.URL.likeAdvertising
+        request.parameters = [
+            Const.API.userId : userId,
+            Const.API.advertisingId : advertisingId
+        ]
+        
+        self.callWebServiceAlamofire(request, success: { (serverResponse) in
+            print(serverResponse as Any)
+            if let serverResponse = serverResponse {
+                let jsonResponse = JSON(serverResponse)
+                completion(true, jsonResponse["response"].string)
+            }
+        }) { (error) in
+            completion(false, nil)
+        }
+    }
+    
 }

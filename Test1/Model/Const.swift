@@ -79,6 +79,8 @@ struct Const {
             static let fakePrice = "۷۲۰۰۰۰۰۰۰ تومان"
             static let fakeAdvertisingDescription = "سیبانه یک استاندارد جدید برای استفاده از پیشرفته ترین اسمارت فون جهان تعریف کرده است. این استاندارد جدید باعث شده است که کاربران ایرانی توانایی بیشتری برای استفاده از محصولات اپل داشته باشند. سیبانه اپ استور اپل را بصورت هوشمندانه و براساس نیازهای کاربران ایرانی بازطراحی کرده و در قالب اپ استور ایرانی نرم افزارهای اورجینال iOS در اختیار کاربران ایرانی قرار داده است."
             
+            static let youNotLoggedIn = "شما وارد حساب خود نشده‌اید!"
+            
         }
         
         struct LoginAndRegister {
@@ -147,12 +149,18 @@ struct Const {
     }
     
     struct URL {
-        static let base = "http://127.0.0.1/Test1/index.php"
-        static let loginEndPoint = "http://127.0.0.1/Test1/logging.php"
-        static let registerEndPoint = "http://127.0.0.1/Test1/register.php"
-        static let allAdvertisingsEndPoint = "http://127.0.0.1/Test1/all-advertisings.php"
-        static let newAdvertisingEndPoint = "http://127.0.0.1/Test1/add-new-advertising.php"
+        static let mainBase = ""
+        static let fakeBase = "http://127.0.0.1/Test1/"
+        static let loginEndPoint = "\(fakeBase)logging.php"
+        static let registerEndPoint = "\(fakeBase)register.php"
+        static let allAdvertisingsEndPoint = "\(fakeBase)all-advertisings.php"
+        static let newAdvertisingEndPoint = "\(fakeBase)add-new-advertising.php"
+        static let likeAdvertising = "\(fakeBase)like-advertising.php"
+        static let singleAdvertisingByUserId = "\(fakeBase)single-advertising-by-userid.php"
+        static let sigleAdvertising = "\(fakeBase)single-advertising.php"
+
         static let fakeJSON = "https://jsonplaceholder.typicode.com/posts"
+        
     }
     
     struct API {
@@ -161,6 +169,7 @@ struct Const {
         static let refreshTokenKey = "refresh_token"
         static let bearer = "Bearer ://"
         static let userId = "user_id"
+        static let advertisingId = "advertising_id"
         static let fullName = "user_full_name"
         
         static let isSuccessful = "isSuccessful"
@@ -175,6 +184,10 @@ struct Const {
         static let notLoggedIn = "شما وارد حساب کاربری خود نشده‌اید!"
         static let fillInTheBlank = "فیلد‌های خالی را پر کنید!"
         static let newAdvertisingRegisteredSuccessfully = "آگهی شما اب موفقیت ثبت شد."
+        static let thereIsProblem = "مشکلی پیش آمده، بعدا امتحان کنید!"
+        static let validateYourInput = "ورودی نامعتبر است!"
+        static let shortCharacter = "طول ورودی‌ها کمتر از حد مجاز است!"
+        
     }
     
     struct TempText {
