@@ -36,7 +36,20 @@ class DetailAdvertisingController: UIViewController {
         }
     }
     
-    private var isFavorite = false
+    private var isFavorite: Bool = false {
+        didSet {
+            print("observer called!")
+            if isFavorite {
+                btnFavorite.setImage(UIImage(named: Const.Image.favorite), for: .normal)
+                btnFavorite.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            } else {
+                
+                btnFavorite.setImage(UIImage(named: Const.Image.favoriteBorder), for: .normal)
+                btnFavorite.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+            }
+            
+        }
+    }
     private var allViews = [UIView]()
     private var mainConstraintBottomConstraint = NSLayoutConstraint()
     
@@ -184,6 +197,7 @@ class DetailAdvertisingController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(r: 37, g: 37, b: 37)
         label.backgroundColor = .white
+        label.textAlignment = .right
         let text = Const.Pages.AdvertisingDetails.fakeAdvertisingDescription
         
         label.addSpaceBetweenLines(string: text, spacing: 4.0)
@@ -192,11 +206,6 @@ class DetailAdvertisingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view did load called")
-        setupView()
-        addViews()
-        addConstraints()
-        
         // get detail of advertising
         // added by: Masoud Heydari.    10 NOV 2018   11:24 AM
         self.getDetailsOfAdvertising()
@@ -226,7 +235,13 @@ class DetailAdvertisingController: UIViewController {
                                 // server is available and response recived.
                                 // added by: Masoud Heydari   10 NOV 2018   10:06  AM
                                 self.detailsOfAdvertising = detailsOfAdvertising
-                                print(detailsOfAdvertising)
+                                if let isFavorite = detailsOfAdvertising?.isFavorite {
+                                    self.isFavorite = isFavorite
+    
+                                    self.setupView()
+                                    self.addViews()
+                                    self.addConstraints()
+                                }
                             }
                         }
                     }
@@ -239,7 +254,12 @@ class DetailAdvertisingController: UIViewController {
                             // server is available and response is recived.
                             // added by Masoud Heydari.    10 NOV 2018   10:13  AM
                             self.detailsOfAdvertising = detailsOfAdvertising
-                            print(detailsOfAdvertising)
+                            print("befor calling")
+                            self.isFavorite = false
+                            
+                            self.setupView()
+                            self.addViews()
+                            self.addConstraints()
                             
                         }
                     }
@@ -269,14 +289,6 @@ class DetailAdvertisingController: UIViewController {
                         if let response = response {
                             self.makeDefualtToast(string: response)
                             self.isFavorite = !self.isFavorite
-                            print(self.isFavorite)
-                            if self.isFavorite {
-                                sender.setImage(UIImage(named: Const.Image.favorite), for: .normal)
-                                sender.imageEdgeInsets = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
-                            }else {
-                                sender.setImage(UIImage(named: Const.Image.favoriteBorder), for: .normal)
-                                sender.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-                            }
                         }
                     }
                 }
@@ -416,7 +428,7 @@ extension DetailAdvertisingController {
         var style = ToastStyle()
         ToastManager.shared.position = .bottom
         style.verticalPadding = 10
-        style.bottomMargin = 100
+        style.bottomMargin = 50
         ToastManager.shared.style = style
         ToastManager.shared.duration = 1.0
         self.view.makeToast(string, style: style)

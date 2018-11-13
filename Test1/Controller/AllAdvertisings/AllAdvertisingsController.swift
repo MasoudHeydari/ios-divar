@@ -37,6 +37,8 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
         showAdvertisings()
         
         
+        print("device kind : \(UIDevice.getKind())")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -289,7 +289,7 @@ class NewAdvertisingController: UIViewController {
         textView.layer.borderWidth = 2
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 20, bottom: 0, right: 20)
         textView.clipsToBounds = true
-        textView.keyboardType = .default
+        textView.keyboardType = .alphabet
         return textView
     }()
     
@@ -421,20 +421,13 @@ class NewAdvertisingController: UIViewController {
         }
     }
     
-    @objc   func btnChooseLocationTapped(_ sender: UIButton) {
+    @objc func btnChooseLocationTapped(_ sender: UIButton) {
         print("btn choose location tapped!")
-        
+        self.isViewDisapear = false
         let chooseLocationVC = PopupChooseLocationViewController()
         chooseLocationVC.delegate = self
+        self.navigationController?.pushViewController(chooseLocationVC, animated: true)
         
-        let popupVC = CustomPopupViewController(contentController: chooseLocationVC, popupWidth: (22 / 30) * view.frame.width, popupHeight: (25 / 30) * view.frame.height)
-        popupVC.backgroundAlpha = 0.3
-        popupVC.backgroundColor = .black
-        popupVC.canTapOutsideToDismiss = true
-        popupVC.cornerRadius = 10
-        popupVC.shadowEnabled = true
-        
-        present(popupVC, animated: true)
     }
     
     
@@ -590,7 +583,8 @@ class NewAdvertisingController: UIViewController {
 extension NewAdvertisingController {
     func setupNavBar() {
         navigationItem.title = Const.NavTitle.newAdvertising
-    }
+        // this code hide the back bar button title. added by: Masoud heydari   13 NOV 2018   11:58
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)    }
     
     func validateTextFields(textFields: [UIView]) {
         for textField in textFields {
@@ -679,6 +673,7 @@ extension NewAdvertisingController {
         scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        scrollView.delegate = self
         
         mainContainer.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor).isActive = true
         mainContainer.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor).isActive = true
@@ -1073,6 +1068,17 @@ extension NewAdvertisingController: TableViewItemSelectionDelegate {
         print("province: \(province)")
         btnChooseLocation.setTitle(province, for: .normal)
         self.selectedLocation = province
+        isViewDisapear = true
     }
 }
 
+
+
+
+extension NewAdvertisingController: UIScrollViewDelegate {
+    
+    // this function close the keybord when scrolling, added by: Masoud Heydari  13 NOV 2018  8:50 AM
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
+}

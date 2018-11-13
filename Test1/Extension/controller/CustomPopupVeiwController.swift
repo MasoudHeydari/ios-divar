@@ -21,6 +21,7 @@ extension CustomPopupViewControllerDelegate {
 
 public class CustomPopupViewController: UIViewController {
     
+    private var isFirst = true
     public enum PopupPosition {
         /// Align center X, center Y with offset param
         case center(CGPoint?)
@@ -49,6 +50,8 @@ public class CustomPopupViewController: UIViewController {
         /// Right anchor, align center Y with right padding param
         case right(CGFloat)
     }
+    
+    private var tapGesture: UITapGestureRecognizer?
     
     /// Popup width, it's nil if width is determined by view's intrinsic size
     private(set) public var popupWidth: CGFloat?
@@ -121,33 +124,14 @@ public class CustomPopupViewController: UIViewController {
         
         setupUI()
         setupViews()
+        addDismissGesture()
     }
     
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        guard let location = touch?.location(in: self.view) else { return }
-        if !(contentView?.frame.contains(location))! {
-            print("Tapped outside the custom popup")
-        }else {
-            print("Tapped inside the custom popup")
-            if let contentController = self.contentController {
-                self.delegate?.popupViewControllerDidDismiss(sender: contentController)
-                self.dismiss(animated: true)
-            }
-        }
-        
-        //        let touch = touches.first
-        //        guard let location = touch?.location(in: self.view) else { return }
-        //        if !containerView.frame.contains(location) {
-        //            print("Tapped outside the custom popup")
-        //            if let contentController = self.contentController {
-        //                self.delegate?.popupViewControllerDidDismiss(sender: contentController)
-        //                self.dismiss(animated: true)
-        //            }
-        //        }else {
-        //            print("Tapped inside the custom popup")
-        //        }
-        
+    // MARK: - Setup
+    private func addDismissGesture() {
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissTapGesture(gesture:)))
+        tapGesture?.delegate = self
+        view.addGestureRecognizer(tapGesture!)
     }
     
     private func setupUI() {
@@ -277,24 +261,107 @@ public class CustomPopupViewController: UIViewController {
         containerView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: offset).isActive = true
         containerView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: offset).isActive = true
     }
+    // MARK: - Actions
+    
+    @objc func dismissTapGesture(gesture: UIGestureRecognizer) {
+        print("touch : \(4)")
+        dismiss(animated: true) {
+            if let contentController = self.contentController {
+                self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+                if let tapGesture = self.tapGesture {
+                    self.view.removeGestureRecognizer(tapGesture)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension CustomPopupViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if isFirst {
+            isFirst = false
+            let location = touch.location(in: self.view)
+            if !(contentView?.frame.contains(location))! {
+                print("tapped out side the main veiw!")
+                //                dismiss(animated: true)
+                return true
+            } else {
+                print("tapped inside the view")
+                return false
+            }
+        }
+        return false
+        
+        
+        
+    }
 }
 
 
+/* =============================================================== */
+/* ===================== * * * * * * * * * * ===================== */
+/* ===================== *    JUNK CODE    * ===================== */
+/* ===================== * * * * * * * * * * ===================== */
+/* =============================================================== */
 
-//
-//// MARK: - UIGestureRecognizerDelegate
-//extension CustomPopupViewController: UIGestureRecognizerDelegate {
-//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        print(2)
-//        guard let touchView = touch.view, canTapOutsideToDismiss else {
-//            return false
-//        }
-//        if !touchView.isDescendant(of: containerView){
-//            dismiss(animated: true) {
-//                self.delegate?.popupViewControllerDidDismiss(sender: self)
-//            }
-//        }
-//
-//        return !touchView.isDescendant(of: containerView)
-//    }
-//}
+
+/*
+     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         let touch = touches.first
+         guard let location = touch?.location(in: self.view) else { return }
+ 
+         if (contentView?.frame.contains(location))! {
+             print("Tapped outside the custom popup")
+             self.dismiss(animated: true)
+         }else {
+             print("Tapped inside the custom popup")
+             if let contentController = self.contentController {
+                 self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+                 self.dismiss(animated: true)
+             }
+         }
+ 
+                 let touch = touches.first
+                 guard let location = touch?.location(in: self.view) else { return }
+                 if !containerView.frame.contains(location) {
+                     print("Tapped outside the custom popup")
+                     if let contentController = self.contentController {
+                         self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+                         self.dismiss(animated: true)
+                     }
+                 }else {
+                     print("Tapped inside the custom popup")
+                 }
+ 
+     }
+ 
+  ------------------------------------------------------------------------
+ 
+         let touch = touches.first
+         guard let location = touch?.location(in: self.view) else { return }
+ 
+         if (contentView?.frame.contains(location))! {
+             print("Tapped outside the custom popup")
+             self.dismiss(animated: true)
+         }else {
+             print("Tapped inside the custom popup")
+             if let contentController = self.contentController {
+                 self.delegate?.popupViewControllerDidDismiss(sender: contentController)
+                 self.dismiss(animated: true)
+             }
+         }
+ 
+ 
+ 
+ 
+ 
+         guard let touchView = touch.view, canTapOutsideToDismiss else {
+             print("touch : \(2)")
+ 
+             return false
+         }
+         print("touch : \(3)")
+ 
+         return !touchView.isDescendant(of: contentView!)
+ */

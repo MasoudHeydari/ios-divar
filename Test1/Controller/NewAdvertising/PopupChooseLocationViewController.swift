@@ -28,6 +28,11 @@ class PopupChooseLocationViewController: UIViewController {
         view.backgroundColor = .yellow
         setupTableView()
         createFakeDataForTableView()
+        setupNavBar()
+    }
+    private func setupNavBar() {
+        self.navigationItem.title = Const.BtnTitle.chooseLocation
+        
     }
 }
 
@@ -43,7 +48,7 @@ extension PopupChooseLocationViewController: UITableViewDelegate, UITableViewDat
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.register(PopupChooseLocationTableViewCell.self, forCellReuseIdentifier: Const.Id.popChooseLocationCellId)
-
+        
         tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -51,19 +56,10 @@ extension PopupChooseLocationViewController: UITableViewDelegate, UITableViewDat
     }
     
     private func createFakeDataForTableView(){
-        var style = ToastStyle()
-//        style.activityBackgroundColor = UIColor.Gray.light4
-        style.fadeDuration = 0.1
-        ToastManager.shared.style = style
-        self.view.makeToastActivity(.center)
-        // delay for 0.2 second
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            self.view.hideToastActivity()
-            for province in Const.Province.provincesList {
-                self.provinceList.append(province)
-            }
-            self.tableView.reloadData()
+        for province in Const.Province.provincesList {
+            self.provinceList.append(province)
         }
+        self.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,18 +75,17 @@ extension PopupChooseLocationViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.currentProvince = provinceList[indexPath.row]
         print("table tapped")
-        if (self.parent as? CustomPopupViewController) != nil {
-            delegate?.tableViewClicked(indexPath: indexPath, province: currentProvince)
-            DispatchQueue.main.async {
-                self.parent?.dismiss(animated: true)
-            }
-            
-        }
         
+        delegate?.tableViewClicked(indexPath: indexPath, province: currentProvince)
+        navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.popViewController(animated: true)
     }
     
 }

@@ -210,7 +210,7 @@ class APIService: BaseService {
                 detailsOfAdvertising.phoneNumber = jsonResponse["phoneNumber"].string
                 detailsOfAdvertising.date = jsonResponse["date"].string
                 detailsOfAdvertising.location = jsonResponse["location"].string
-                detailsOfAdvertising.isFavorite = jsonResponse["isLiked"].bool
+                detailsOfAdvertising.isFavorite = Bool(jsonResponse["isLiked"].string ?? "false")
                 
                 completion(true, detailsOfAdvertising)
             }
