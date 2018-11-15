@@ -205,12 +205,26 @@ class ProfileTabController: UIViewController {
     
     @objc private func btnMyAdvertisingsTapped(_ sender: UIButton) {
         print("btn my advertisings tapped!")
-        navigationController?.pushViewController(MyAdvertisingsViewController(), animated: true)
+        // check wheaser user already registered/logged in or not.   added by: Masoud Heydari  15 NOV 2018  08:54  AM
+        if APIService.shared.isLoggedIn() {
+            navigationController?.pushViewController(MyAdvertisingsViewController(), animated: true)
+        }else {
+            // user not loggin or registered. added by: Masoud Heydari  15 NOV 2018  08:55 AM
+            self.makeDefualtToast(string: Const.Toast.notLoggedIn)
+        }
     }
     
     @objc private func btnFavAdertisingsTapped(_ sender: UIButton) {
         print("btn favorite advertisings tapped!")
-        navigationController?.pushViewController(MyFavAdvertisingsViewController(), animated: true)
+        // check wheather user already logged in or not. added by: Masoud Heydari 15 NOV 2018   08:52
+        if APIService.shared.isLoggedIn() {
+            let layout = UICollectionViewFlowLayout()
+            navigationController?.pushViewController(MyFavAdvertisingsViewController(collectionViewLayout: layout), animated: true)
+            
+        }else {
+            // user not logged in, tell it to user. added by: Masoud heydari  15 NOV 2018   08:53   AM
+            self.makeDefualtToast(string: Const.Toast.notLoggedIn)
+        }
     }
     
     @objc private func btnAboutDivarTapped(_ sender: UIButton) {
@@ -222,5 +236,16 @@ class ProfileTabController: UIViewController {
         print("btn about us tapped!")
         navigationController?.pushViewController(AboutUsViewController(), animated: true)
     }
+    
+    func makeDefualtToast(string: String, duration: TimeInterval = 1.0) {
+        var style = ToastStyle()
+        ToastManager.shared.position = .bottom
+        style.verticalPadding = 10
+        style.bottomMargin = 100
+        ToastManager.shared.style = style
+        ToastManager.shared.duration = duration
+        self.view.makeToast(string, style: style)
+    }
+    
     
 }

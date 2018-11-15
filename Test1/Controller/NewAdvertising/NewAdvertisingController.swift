@@ -377,17 +377,18 @@ class NewAdvertisingController: UIViewController {
             imageList.removeSubrange(range)
             reloadImageCollectionView()
             clearTextOfTextFields()
+            self.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
+            
         }
         
         if isViewDisapear {
             clearTextOfTextFields()
             self.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
         }
-        
-        self.btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("view will apeaer!")
         // set all text fields's background and border color to default
         // added by: Masoud heydari.   10 NON 2018   11:04   AM
         if isViewDisapear {
@@ -1064,11 +1065,15 @@ extension NewAdvertisingController: UITextViewDelegate {
 }
 
 extension NewAdvertisingController: TableViewItemSelectionDelegate {
+    func tableViewDisapeared() {
+        print("table view disapeared")
+    }
+    
     func tableViewClicked(indexPath: IndexPath, province: String) {
         print("province: \(province)")
         btnChooseLocation.setTitle(province, for: .normal)
-        self.selectedLocation = province
         isViewDisapear = true
+        self.selectedLocation = province
     }
 }
 

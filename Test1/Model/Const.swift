@@ -87,6 +87,10 @@ struct Const {
             static let alreadyRegistered = "قبلا ثبت نام کرده‌ام!"
             static let notRegister = "ثبت نام نکردی؟ ثبت نام کن!"
         }
+        
+        struct MyFavAdvertisings {
+            static let thereNoFavAdvertising = "شما هیچ آگهی نشان شده‌ای ندارید!"
+        }
     }
     
     struct Cells {
@@ -134,6 +138,7 @@ struct Const {
     
     struct Id {
         static let allAdvertisingCell = "advertising_cell_id"
+        static let favAdvertisingCell = "fav_advertising_cell_id"
         static let imageCell = "image_cell"
         static let imageEmptyCell = "image_empty_cell"
         static let popChooseLocationCellId = "popup_Chooce_location_cell_id"
@@ -158,6 +163,7 @@ struct Const {
         static let likeAdvertising = "\(fakeBase)like-advertising.php"
         static let singleAdvertisingByUserId = "\(fakeBase)single-advertising-by-userid.php"
         static let sigleAdvertising = "\(fakeBase)single-advertising.php"
+        static let favAdvertisings = "\(fakeBase)user-advertisings.php"
 
         static let fakeJSON = "https://jsonplaceholder.typicode.com/posts"
         
@@ -194,6 +200,7 @@ struct Const {
         static let newAdvertising = "بخش 'آگهی جدید' بزودی کامل می شود"
         static let myAdvertisings = "بخش 'آگهی‌های من' بزودی بروز رسانی می شود"
         static let loginUser = "بخش 'ورود کاربر' بزودی بروز رسانی می شود"
+        static let favoriteAdvertising = "بخش 'نشان شده‌ها' بزودی بروز رسانی می شود"
         static let phoneNumber = "09195474883"
         static let qazvin = "قزوین"
     }

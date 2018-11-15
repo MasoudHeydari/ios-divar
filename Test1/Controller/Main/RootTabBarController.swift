@@ -88,6 +88,8 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     @objc private func menuButtonAction(sender: UIButton) {
+        print("plus button tapped ")
+        (viewControllers![1] as? UINavigationController)?.popToRootViewController(animated: false)
         selectedIndex = 1
     }
     

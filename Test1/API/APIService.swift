@@ -131,13 +131,13 @@ class APIService: BaseService {
         request.parameters = [ : ]
         
         self.callWebServiceAlamofire(request, success: { (response) in
-            // optional unwrapping 'response'
+            // unwrapping 'response'
             if let response = response {
                 let jsonArray = JSON(response)
                 if let jsonArray = jsonArray.array {
                     for json in jsonArray {
-                        let advertisin = AdvertisingModel(json: json)
-                        advertisingsList.append(advertisin)
+                        let advertising = AdvertisingModel(json: json)
+                        advertisingsList.append(advertising)
                     }
                     completion(true, advertisingsList)
                 }
@@ -149,6 +149,44 @@ class APIService: BaseService {
         }) { (error) in
             completion(false, nil)
         }
+    }
+    
+    
+    // this method get all advertisings that user already liked.   added by: Masoud Heydari  15 NOV 2018  08:28  AM
+    public func getFavoriteAdvertisingByUserId(completion: @escaping (_ favAdvertisings: [AdvertisingModel]?) -> Void) {
+        guard let userId = KeychainWrapper.standard.integer(forKey: Const.API.userId) else {
+            return
+        }
+        var favAdvertisingList: [AdvertisingModel]? = [AdvertisingModel]()
+        var request = AlamofireRequestModal()
+        request.headers = nil
+        request.path = Const.URL.favAdvertisings
+        request.encoding = URLEncoding.httpBody
+        request.method = .post
+        request.parameters = [
+            "user_id" : userId
+        ]
+
+        self.callWebServiceAlamofire(request, success: { (response) in
+            if let response = response {
+                let responseArray = JSON(response)
+                print(responseArray)
+                if let responseArray = responseArray.array {
+                    for json in responseArray {
+                        let advertising = AdvertisingModel(json: json)
+                        favAdvertisingList?.append(advertising)
+                    }
+                    completion(favAdvertisingList)
+                }
+            }
+        }) { (error) in
+            print(error?.localizedDescription as Any)
+            completion(nil)
+        }
+    }
+    
+    public func getUserAdvertisings(){
+        
     }
     
     public func registerNewAdvertising(newAdvertising: NewAdvertisingModel, completion: @escaping (_ done: Bool, _ response: String?) -> Void){

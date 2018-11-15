@@ -32,7 +32,6 @@ class PopupChooseLocationViewController: UIViewController {
     }
     private func setupNavBar() {
         self.navigationItem.title = Const.BtnTitle.chooseLocation
-        
     }
 }
 
@@ -85,7 +84,7 @@ extension PopupChooseLocationViewController: UITableViewDelegate, UITableViewDat
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.popViewController(animated: true)
+        self.delegate?.tableViewDisapeared()
     }
     
 }
