@@ -83,12 +83,9 @@ class MyFavAdvertisingsViewController: UICollectionViewController, UICollectionV
     }
     
     private func getFavoriteAdvertisingFromServer(){
-        print(0)
         APIService.shared.getFavoriteAdvertisingByUserId(completion: { [weak self] (advertisingList) in
             // util loading data from server it is one of the best practice to show toast activiy for user.
             // added by: Masoud Heydari.   15 NOV 2018    09:40 AM
-            print("1 + \(advertisingList?.count)")
-            
             
             self?.view.makeToastActivity(.center)
             
@@ -102,7 +99,6 @@ class MyFavAdvertisingsViewController: UICollectionViewController, UICollectionV
                 self?.advertisingList = advertisingList
                 self?.collectionView.reloadData()
             } else {
-                print(5)
                 // server not responding. added by: Masoud Heydari    15 NOV 2018   09:58 AM
                 self?.makeDefualtToast(string: Const.Toast.serverNotResponding, duration: 1.75)
                 // hide the showing toast activity from view with 1.1 seconds delay.

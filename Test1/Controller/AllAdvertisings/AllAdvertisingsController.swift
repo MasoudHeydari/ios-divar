@@ -78,10 +78,18 @@ class AllAdvertisingsController: UICollectionViewController, UICollectionViewDel
     }
     
     private func setupNavController(){
+        // add refresh icon to left side of navigation controller. added by: Masoud Heydari  15 NOV 2018   03:58  PM
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.resizeImage(image: UIImage(named: Const.Image.refresh), targetSize: CGSize(width: 20, height: 20)), style: .plain, target: self, action: #selector(self.btnRefreshTapped(_:)))
+        
         self.navigationItem.backBarButtonItem?.title = Const.empty
         navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)
         navigationItem.title = Const.NavTitle.allAdvertisings
         
+    }
+    
+    @objc private func btnRefreshTapped(_ sender: Any) {
+        print("btn refresh tapped!")
+        getAllAdvertisingFromServer()
     }
     
     private func getAllAdvertisingFromServer(){

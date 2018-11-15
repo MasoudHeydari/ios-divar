@@ -431,6 +431,15 @@ class NewAdvertisingController: UIViewController {
         
     }
     
+    @objc private func btnDeleteTapped(_ sender: Any){
+        print("btn delete tapped!")
+        clearTextOfTextFields()
+        btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
+        self.imageList.removeAll()
+        self.imageList.append(UIImage())
+        reloadImageCollectionView()
+    }
+    
     
     @objc func btnRegisterAdTapped(_ sender: UIButton) {
         // close the keyboard, if is open.
@@ -583,9 +592,15 @@ class NewAdvertisingController: UIViewController {
 
 extension NewAdvertisingController {
     func setupNavBar() {
+        // add delete icon to left side of navigation controller. added by: Masoud Heydari   15 NOV 2018 11:44 AM
+        let delete = UIImage(named: Const.Image.delete)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.resizeImage(image: delete, targetSize: CGSize(width: 16, height: 16)), style: .plain, target: self, action: #selector(self.btnDeleteTapped(_:)))
+        
         navigationItem.title = Const.NavTitle.newAdvertising
         // this code hide the back bar button title. added by: Masoud heydari   13 NOV 2018   11:58
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)    }
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: Const.empty, style: .plain, target: self, action: nil)
+        
+    }
     
     func validateTextFields(textFields: [UIView]) {
         for textField in textFields {

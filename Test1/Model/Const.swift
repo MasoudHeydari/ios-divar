@@ -24,6 +24,7 @@ struct Const {
         static let addPhoto = "add_photo"
         static let tempImage = "temp_img"
         static let delete = "delete"
+        static let refresh = "refresh"
     }
     
     struct PlaceHolder {
