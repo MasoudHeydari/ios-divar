@@ -435,9 +435,7 @@ class NewAdvertisingController: UIViewController {
         print("btn delete tapped!")
         clearTextOfTextFields()
         btnChooseLocation.setTitle(Const.BtnTitle.chooseLocation, for: .normal)
-        self.imageList.removeAll()
-        self.imageList.append(UIImage())
-        reloadImageCollectionView()
+        removeImageList()
     }
     
     
@@ -518,9 +516,7 @@ class NewAdvertisingController: UIViewController {
                                                 
                                                 self?.makeDefualtToast(string: Const.Toast.newAdvertisingRegisteredSuccessfully)
                                                 
-                                                // remove all images from imageList and reload collection view
-                                                self?.imageList.removeAll()
-                                                self?.reloadImageCollectionView()
+                                                self?.removeImageList()
                                                 
                                                 // erase text field's inputs
                                                 self?.clearTextOfTextFields()
@@ -580,6 +576,13 @@ class NewAdvertisingController: UIViewController {
     
     @objc func dismissAlertController(){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func removeImageList() {
+        // remove all images from imageList and reload collection view
+        self.imageList.removeAll()
+        self.imageList.append(UIImage())
+        self.reloadImageCollectionView()
     }
     
 }
@@ -1051,7 +1054,7 @@ extension NewAdvertisingController: UITextFieldDelegate {
 
 /* ===================================================================== */
 /* =================== * * * * * * * * * * * * * * ===================== */
-/* =================== *   TEXT VIEW EXTENSION  * ===================== */
+/* =================== *   TEXT VIEW EXTENSION  * ====================== */
 /* =================== * * * * * * * * * * * * * * ===================== */
 /* ===================================================================== */
 extension NewAdvertisingController: UITextViewDelegate {
