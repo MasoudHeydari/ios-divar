@@ -23,7 +23,10 @@
 		957FC84521710CB10011CD8C /* UIButton+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC84421710CB10011CD8C /* UIButton+Helper.swift */; };
 		957FC847217127650011CD8C /* NewAdvertisingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957FC846217127650011CD8C /* NewAdvertisingController.swift */; };
 		959462F521999F1B00806051 /* UIDevice+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959462F421999F1B00806051 /* UIDevice+Helper.swift */; };
+		959BEC1921AB083400948396 /* CustomPopupVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BEC1821AB083400948396 /* CustomPopupVeiwController.swift */; };
 		95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */; };
+		95C0615621A9185E0007B9F3 /* String+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C0615521A9185E0007B9F3 /* String+Helper.swift */; };
+		95C0615821A919070007B9F3 /* Alert+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C0615721A919070007B9F3 /* Alert+Helper.swift */; };
 		95C563E1217906A60084C265 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C563E0217906A60084C265 /* UIImageView+Helper.swift */; };
 		95CE1A072175A76300673470 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A062175A76300673470 /* Utils.swift */; };
 		95CE1A092175A78700673470 /* UILabel+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE1A082175A78700673470 /* UILabel+Helper.swift */; };
@@ -40,8 +43,6 @@
 		95E8EE4B217E01B300735627 /* MyFavAdvertisingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4A217E01B300735627 /* MyFavAdvertisingViewController.swift */; };
 		95E8EE4D217E01CF00735627 /* AboutDivarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4C217E01CF00735627 /* AboutDivarViewController.swift */; };
 		95E8EE4F217E01E100735627 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E8EE4E217E01E100735627 /* AboutUsViewController.swift */; };
-		95E9A3E4218B643100274016 /* CustomPopupVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */; };
-		95FF44C0218726E5005E83FE /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */; };
 		95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C12187274D005E83FE /* KeychainWrapper.swift */; };
 		95FF44C521874908005E83FE /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C421874908005E83FE /* BaseService.swift */; };
 		95FF44C721874977005E83FE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FF44C621874977005E83FE /* APIService.swift */; };
@@ -67,7 +68,10 @@
 		957FC84421710CB10011CD8C /* UIButton+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Helper.swift"; sourceTree = "<group>"; };
 		957FC846217127650011CD8C /* NewAdvertisingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingController.swift; sourceTree = "<group>"; };
 		959462F421999F1B00806051 /* UIDevice+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Helper.swift"; sourceTree = "<group>"; };
+		959BEC1821AB083400948396 /* CustomPopupVeiwController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPopupVeiwController.swift; sourceTree = "<group>"; };
 		95A28173217EF6B7004162A3 /* NewAdvertisingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisingImageCell.swift; sourceTree = "<group>"; };
+		95C0615521A9185E0007B9F3 /* String+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helper.swift"; sourceTree = "<group>"; };
+		95C0615721A919070007B9F3 /* Alert+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Helper.swift"; sourceTree = "<group>"; };
 		95C563E0217906A60084C265 /* UIImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helper.swift"; sourceTree = "<group>"; };
 		95CE1A062175A76300673470 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		95CE1A082175A78700673470 /* UILabel+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Helper.swift"; sourceTree = "<group>"; };
@@ -84,8 +88,6 @@
 		95E8EE4A217E01B300735627 /* MyFavAdvertisingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavAdvertisingViewController.swift; sourceTree = "<group>"; };
 		95E8EE4C217E01CF00735627 /* AboutDivarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDivarViewController.swift; sourceTree = "<group>"; };
 		95E8EE4E217E01E100735627 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
-		95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupVeiwController.swift; sourceTree = "<group>"; };
-		95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		95FF44C12187274D005E83FE /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		95FF44C421874908005E83FE /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		95FF44C621874977005E83FE /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				95D92A0F2171D2340019FAFF /* UIImage+Helper.swift */,
 				95CE1A082175A78700673470 /* UILabel+Helper.swift */,
 				955E63AC2192EC8C00B44115 /* UITextView+Helper.swift */,
+				95C0615721A919070007B9F3 /* Alert+Helper.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -204,11 +207,19 @@
 			children = (
 				95D92A0D2171D2030019FAFF /* UIColor+Helper.swift */,
 				95CE1A062175A76300673470 /* Utils.swift */,
-				95FF44BF218726E5005E83FE /* KeychainItemAccessibility.swift */,
 				95FF44C12187274D005E83FE /* KeychainWrapper.swift */,
 				959462F421999F1B00806051 /* UIDevice+Helper.swift */,
+				95C0615521A9185E0007B9F3 /* String+Helper.swift */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		959BEC1521AB070300948396 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				959BEC1821AB083400948396 /* CustomPopupVeiwController.swift */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 		95BF336E21721BBC00050769 /* Model */ = {
@@ -218,13 +229,6 @@
 				95E8EE44217DE51700735627 /* Const.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		95CAB17221906E0800C37C30 /* network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = network;
 			sourceTree = "<group>";
 		};
 		95D92A072171B2B30019FAFF /* Cell */ = {
@@ -241,8 +245,7 @@
 		95D92A0C2171BD340019FAFF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				95CAB17221906E0800C37C30 /* network */,
-				95E9A3E2218B641800274016 /* controller */,
+				959BEC1521AB070300948396 /* controller */,
 				959978BF2186D73D00B9DAD0 /* view */,
 				959978C02186D75800B9DAD0 /* utils */,
 			);
@@ -288,14 +291,6 @@
 				95D92A042171AF4F0019FAFF /* CustomNavigationController.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		95E9A3E2218B641800274016 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				95E9A3E3218B643100274016 /* CustomPopupVeiwController.swift */,
-			);
-			path = controller;
 			sourceTree = "<group>";
 		};
 		95FF44C3218748EF005E83FE /* API */ = {
@@ -441,7 +436,6 @@
 				9508F19621724A1A00A5F4E0 /* AdvertisingModel.swift in Sources */,
 				959462F521999F1B00806051 /* UIDevice+Helper.swift in Sources */,
 				95FF44C521874908005E83FE /* BaseService.swift in Sources */,
-				95E9A3E4218B643100274016 /* CustomPopupVeiwController.swift in Sources */,
 				9506E0002170B03B002A6FFC /* RootTabBarController.swift in Sources */,
 				9506E0102170B188002A6FFC /* AllAdvertisingsController.swift in Sources */,
 				95CE1A072175A76300673470 /* Utils.swift in Sources */,
@@ -450,13 +444,16 @@
 				95CE1A092175A78700673470 /* UILabel+Helper.swift in Sources */,
 				95E8EE4D217E01CF00735627 /* AboutDivarViewController.swift in Sources */,
 				95D92A092171B30C0019FAFF /* AdvertisingCell.swift in Sources */,
+				95C0615621A9185E0007B9F3 /* String+Helper.swift in Sources */,
 				9506E0122170B36D002A6FFC /* ProfileTabViewController.swift in Sources */,
 				95A28174217EF6B7004162A3 /* NewAdvertisingImageCell.swift in Sources */,
+				959BEC1921AB083400948396 /* CustomPopupVeiwController.swift in Sources */,
 				95D92A102171D2340019FAFF /* UIImage+Helper.swift in Sources */,
 				9506DFFE2170B03B002A6FFC /* AppDelegate.swift in Sources */,
 				95FFD0DF21994BEF00C26C3B /* temp.swift in Sources */,
 				95DB3D6C21901A23009D2E9D /* UIView+Toast.swift in Sources */,
 				95D8D8B5218CF584002EF37F /* PopupChooseLocationTableViewCell.swift in Sources */,
+				95C0615821A919070007B9F3 /* Alert+Helper.swift in Sources */,
 				955E63AD2192EC8C00B44115 /* UITextView+Helper.swift in Sources */,
 				95FF44C22187274D005E83FE /* KeychainWrapper.swift in Sources */,
 				9524FBCD218181A700650937 /* Protocols.swift in Sources */,
@@ -466,7 +463,6 @@
 				95E8EE47217DF36800735627 /* MyAdvertisingsViewController.swift in Sources */,
 				95D92A0B2171B3330019FAFF /* BaseCell.swift in Sources */,
 				95D92A052171AF4F0019FAFF /* CustomNavigationController.swift in Sources */,
-				95FF44C0218726E5005E83FE /* KeychainItemAccessibility.swift in Sources */,
 				9553BCFE218B9594001B28F7 /* PopupChooseLocationViewController.swift in Sources */,
 				95E8EE4B217E01B300735627 /* MyFavAdvertisingViewController.swift in Sources */,
 				95E8EE45217DE51700735627 /* Const.swift in Sources */,

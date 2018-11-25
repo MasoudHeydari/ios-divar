@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 extension UIImageView {
     public func setImageByURL(url: String, method: HTTPMethod) {

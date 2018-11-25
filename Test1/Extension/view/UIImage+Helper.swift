@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 
 extension UIImage {
     static func resizeImage(image: UIImage?, targetSize: CGSize) -> UIImage {
@@ -87,18 +86,18 @@ extension UIImage {
         return newImage
     }
     
-    class func getImageByURL(url: String, method: HTTPMethod) -> UIImage {
-        var returnImage = UIImage()
-        Alamofire.request(url, method: method).responseImage { response in
-            guard let image = response.result.value else {
-                // Handle error
-                return
-            }
-            returnImage = image
-        }
-        
-        return returnImage
-    }
+//    class func getImageByURL(url: String, method: HTTPMethod) -> UIImage {
+//        var returnImage = UIImage()
+//        Alamofire.request(url, method: method).responseImage { response in
+//            guard let image = response.result.value else {
+//                // Handle error
+//                return
+//            }
+//            returnImage = image
+//        }
+//
+//        return returnImage
+//    }
     
     enum JPEGQuality: CGFloat {
         case lowest  = 0
